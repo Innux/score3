@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.devMode" value="false" />
+
+	<package name="score3" extends="struts-default" namespace="/">
+		<!-- 配置页面跳转action -->
+		<action name="jump_*" class="jumpAction" method="{1}">          
+            <result name="j2CreateStu">/WEB-INF/jsp/createStu.jsp</result>      
+             <!-- <result name="j2UserList">/WEB-INF/jsp/userList.jsp</result>  -->
+        </action>
+	
+		<!-- 配置用户的Action -->
+		<action name="admin_*" class="adminAction" method="{1}">
+            <result name="loginSuccess">/WEB-INF/jsp/index.jsp</result>              
+            <result name="loginFailed">/</result>           
+           <!--  <result name="jump2addStu">/WEB-INF/jsp/createStu.jsp</result>    -->   
+        </action>
+        
+        <action name="stu_*" class="studentAction" method="{1}">         
+            <result name="createStu">/WEB-INF/jsp/createStu.jsp</result>  
+            <result name="findAll">/WEB-INF/jsp/userList.jsp</result>  
+            <result name="list">/WEB-INF/jsp/userList.jsp</result>     
+        </action>
+		
+	</package>
+</struts>
