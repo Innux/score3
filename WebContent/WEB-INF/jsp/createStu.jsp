@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="/struts-tags" prefix="s"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,8 +78,7 @@
                                 <div class="span10 field-box">
                                     <label>密码:</label>
                                     <!--<input class="span9" type="text" placeholder="默认为学号"/>-->
-                                    <input name="loginPwd" 
-                                    class="span7 " data-toggle="tooltip"
+                                    <input class="span7 " data-toggle="tooltip"
                                            data-trigger="focus" title="密码默认为学号"
                                            data-placement="right" type="text" />
                                 </div>
@@ -104,14 +104,17 @@
                                             </label>
                                         </div>
                                     </div>
-
+<!--====================== 选择器====================== -->
                                     <div class="span10 field-box">
                                         <label>学院:</label>
                                         <div class="ui-select span5">
-                                            <select>
-                                                <option value="JSJ" />计算机与通信学院
-                                                <option value="CL" />材料科学与工程学院
-                                                <option value="JD" />机电工程学院
+                                            <select onchange="findAllMajor()" id="academyId">
+                                            	<option value="0">请选择</option>  
+                                          	 	<s:iterator value="academys" var="aca">
+													<option value="<s:property value="#aca.a_id"/>">
+														<s:property value="#aca.a_name"/>
+													</option>
+												</s:iterator>   		
                                             </select>
                                         </div>
                                     </div>
@@ -119,10 +122,8 @@
                                     <div class="span10 field-box">
                                         <label>专业:</label>
                                         <div class="ui-select span5">
-                                            <select>
-                                                <option value="JSJ" />软件工程
-                                                <option value="CL" />物联网
-                                                <option value="JD" />计算机与科学
+                                            <select id="majorId">
+                                                <option value="0">请选择</option>  
                                             </select>
                                         </div>
                                     </div>
@@ -130,9 +131,7 @@
                                         <label>班级:</label>
                                         <div class="ui-select span5">
                                             <select>
-                                                <option value="JSJ" />软件工程1
-                                                <option value="CL" />软件工程2
-                                                <option value="JD" />软件工程3
+                                                <option value="0">请选择</option>  
                                             </select>
                                         </div>
                                     </div>
@@ -147,7 +146,6 @@
                             </form>
                         </div>
                     </div>
-
 
                     <div class="span3 form-sidebar pull-right">
 
@@ -172,6 +170,27 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/theme.js"></script>
     <script type="text/javascript">
+    
+    function findAllMajor() {
+    	var acaSelect = document.getElementById("academyId");
+    	var index = acaSelect.selectedIndex;
+    	var academyId = acaSelect.options[index].value;
+    	
+    	var xhr = createXmlHttp();
+    	xhr.onreadystatechange = function(){
+    		if(xhr.readyState == 4) {
+    			if(xhr.status == 200) {
+    				document.getElementById("span1").innerHTML = xhr.responseText;
+    			}
+    		}
+    	}
+    	xhr.open("GET",
+    			"${pageContext.request.contextPath}/academy_findAllMajor.action?time="
+    					+new Date().getTime()+"&a_id="+academyId,true);
+    	xhr.send(null);
+    }
+    
+    
     function checkStuLoginName() {
     	var loginName = document.getElementById("loginName").value;
     	var xhr = createXmlHttp();

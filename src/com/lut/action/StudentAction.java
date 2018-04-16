@@ -27,7 +27,6 @@ public class StudentAction extends ActionSupport implements ModelDriven<Student>
     // page参数
     private Integer page;
     private List<Student> students;
-//    private PageBean<Student> pageBean;
 
     public String findAll() {
 	PageBean<Student> pageBean = studentService.findByPage(page);

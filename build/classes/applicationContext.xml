@@ -42,6 +42,9 @@
 			<list>
 				<value>com/lut/vo/Admin.hbm.xml</value>
 				<value>com/lut/vo/Student.hbm.xml</value>
+				<value>com/lut/vo/Academy.hbm.xml</value>
+				<value>com/lut/vo/Major.hbm.xml</value>
+				<value>com/lut/vo/Clazz.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -58,8 +61,6 @@
 
 	<!--============== Action的配置 =========================== -->
 
-	<bean id="jumpAction" class="com.lut.action.JumpAction" scope="prototype">
-	</bean>
 	<!-- 管理员的Action -->
 	<bean id="adminAction" class="com.lut.action.AdminAction" scope="prototype">
 		<property name="adminService" ref="adminService"></property>
@@ -67,6 +68,10 @@
 	<!-- 学生的Action -->
 	<bean id="studentAction" class="com.lut.action.StudentAction" scope="prototype">
 		<property name="studentService" ref="studentService"></property>
+	</bean>
+	<!-- 学院action（一级分类） -->
+	<bean id="academyAction" class="com.lut.action.AcademyAction" scope="prototype">
+		<property name="academyService" ref="academyService"></property>
 	</bean>
 
 
@@ -78,14 +83,22 @@
 	<bean id="studentService" class="com.lut.service.StudentService">
 		<property name="studentDao" ref="studentDao" />
 	</bean>
-
+	<!--AcademyService配置  -->
+	<bean id="academyService" class="com.lut.service.AcademyService">
+		<property name="academyDao" ref="academyDao" />
+	</bean>
 
 
 	<!--================ Dao的配置 =========================== -->
 	<bean id="adminDao" class="com.lut.dao.AdminDao">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	<!-- 学生dao配置 -->
 	<bean id="studentDao" class="com.lut.dao.StudentDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 学院dao配置 -->
+	<bean id="academyDao" class="com.lut.dao.AcademyDao">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 

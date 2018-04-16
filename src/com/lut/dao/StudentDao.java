@@ -31,7 +31,6 @@ public class StudentDao extends HibernateDaoSupport {
     public List<Student> list() {
 	String hql = "from Student";
 	List<Student> list = this.getHibernateTemplate().find(hql);
-	System.out.println("===Dao====" + list.get(0).getLoginName());
 	return list;
     }
 
