@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib uri="/struts-tags" prefix="s"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -121,29 +121,71 @@
 								<td>88</td>
 								<td><a href="#">编辑</a> <a href="#">删除</a></td>
 							</tr>
+							<s:iterator var="sco" value="pageBean.list" status="status">
+								<tr>
+									<td>
+										<s:property value="#sco.s_year"/>
+									</td>
+									<td>
+										<s:property value="#sco.s_half"/>
+									</td>
+									<td>
+										<s:property value="#sco.student.name"/>
+									</td>
+									<td>
+										<s:property value="#sco.student.name"/>
+									</td>
+									<td>
+										<s:property value="#sco.student.name"/>
+									</td>
+									<td>
+										<s:property value="#sco.student.name"/>
+									</td>
+									<td>
+										<s:property value="#sco.s_score"/>
+									</td>
+									<td>
+										<a href="#">编辑</a>
+										<a href="#">删除</a>
+									</td>
+								</tr>
+							</s:iterator>
 							<!-- row -->
-							<tr class="">
-								<td>2017</td>
-								<td>上学期</td>
-								<td>张三</td>
-								<td>软件工程</td>
-								<td>2</td>
-								<td>Java</td>
-								<td>88</td>
-								<td><a href="#">编辑</a> <a href="#">删除</a></td>
-							</tr>
+							
 						</tbody>
 					</table>
 				</div>
+				<!--================= 分页======================== -->
+第<s:property value="pageBean.page"/>/<s:property value="pageBean.totalPage"/>页 
+
 				<div class="pagination pull-right">
 					<ul>
-						<li><a href="#">&#8249;</a></li>
+					<!--  上一页-->
+					<li>
+						<s:if test="pageBean.page != 1">
+<a href="${ pageContext.request.contextPath }/stu_findAll.action?page=<s:property value="pageBean.page-1"/>">&#8249;</a>
+						</s:if>
+						<s:else>
+						<a href="#">&#8249;</a>
+						</s:else>
+					</li>
+					<!-- 选页 -->
 						<li><a class="active" href="#">1</a></li>
 						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">&#8250;</a></li>
+					<!-- 选页end -->
+					<!-- 下一页 -->
+						<!-- <li><a href="#">&#8250;</a></li> -->
+						<li>
+						<s:if test="pageBean.page != pageBean.totalPage">
+<a href="${ pageContext.request.contextPath }/stu_findAll.action?page=<s:property value="pageBean.page+1"/>">&#8250;</a>
+						</s:if>
+						<s:else>
+						<a href="#">&#8250;</a>
+						</s:else>
+						</li>
 					</ul>
 				</div>
+				<!-- end users table -->
 				<!-- end users table -->
 			</div>
 		</div>

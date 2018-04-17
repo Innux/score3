@@ -75,6 +75,10 @@
 	<bean id="academyAction" class="com.lut.action.AcademyAction" scope="prototype">
 		<property name="academyService" ref="academyService"></property>
 	</bean>
+	<!-- 成绩 -->
+	<bean id="scoreAction" class="com.lut.action.ScoreAction" scope="prototype">
+		<property name="scoreService" ref="scoreService"></property>
+	</bean>
 
 
 	<!-- ==============Service的配置 =========================== -->
@@ -89,6 +93,10 @@
 	<bean id="academyService" class="com.lut.service.AcademyService">
 		<property name="academyDao" ref="academyDao" />
 	</bean>
+	<!-- 成绩 -->
+	<bean id="scoreService" class="com.lut.service.ScoreService">
+		<property name="scoreDao" ref="scoreDao" />
+	</bean>
 
 
 	<!--================ Dao的配置 =========================== -->
@@ -101,6 +109,10 @@
 	</bean>
 	<!-- 学院dao配置 -->
 	<bean id="academyDao" class="com.lut.dao.AcademyDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 成绩 -->
+	<bean id="scoreDao" class="com.lut.dao.ScoreDao">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 

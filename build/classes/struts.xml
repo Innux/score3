@@ -28,6 +28,10 @@
             	<param name="messageAjax">messageAjax</param>
             </result>    
         </action>
+        <!-- 成绩 -->
+        <action name="score_*" class="scoreAction" method="{1}">      
+            <result name="findAll">/WEB-INF/jsp/scoreList.jsp</result>   
+        </action>
 		
 	</package>
 </struts>

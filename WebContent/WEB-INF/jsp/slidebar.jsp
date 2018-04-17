@@ -30,7 +30,7 @@
                 <i class="icon-chevron-down"></i>
             </a>
             <ul class="submenu">
-                <li><a href="#">成绩查询</a></li>
+                <li><a href="${pageContext.request.contextPath }/score_findAll.action?page=1">成绩查询</a></li>
                 <li><a href="#">新增成绩</a></li>
                 <li><a href="#">德智体综合排名</a></li>
             </ul>

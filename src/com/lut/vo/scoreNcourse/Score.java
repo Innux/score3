@@ -7,8 +7,8 @@ public class Score {
     private Integer s_score;
     private String s_year;
     private Integer s_half;
-    private Student stu;
-    private Course cou;
+    private Student student;
+    private Course course;
 
     public Integer getS_id() {
 	return s_id;
@@ -42,20 +42,22 @@ public class Score {
 	this.s_half = s_half;
     }
 
-    public Student getStu() {
-	return stu;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setStu(Student stu) {
-	this.stu = stu;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
-    public Course getCou() {
-	return cou;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setCou(Course cou) {
-	this.cou = cou;
+    public void setCourse(Course course) {
+        this.course = course;
     }
+
+ 
 
 }
