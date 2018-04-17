@@ -14,11 +14,14 @@ public class AcademyDao extends HibernateDaoSupport {
 	List<Academy> academys = this.getHibernateTemplate().find(hql);
 	return academys;
     }
-    
+
     public List<Major> findMajorByAcademyId(Integer mid) {
 	String hql = "from Major where a_id=?";
-	List<Major> majors = this.getHibernateTemplate().find(hql,mid);
-	System.out.println("=====" + majors.get(0).getM_name());
-	return majors;
+	List<Major> majors = this.getHibernateTemplate().find(hql, mid);
+	if (majors.size() != 0) {
+	    return majors;
+	} else {
+	    return null;
+	}
     }
 }

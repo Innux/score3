@@ -1,8 +1,11 @@
 package com.lut.action;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
@@ -21,54 +24,71 @@ public class AcademyAction extends ActionSupport implements ModelDriven<Academy>
     public Academy getModel() {
 	return academy;
     }
-    
+
     private AcademyService academyService;
 
     public void setAcademyService(AcademyService academyService) {
-        this.academyService = academyService;
+	this.academyService = academyService;
     }
-    
+
     private List<Academy> academys;
-    //查询所有学院
+
+    // 查询所有学院
     public String findAllAcademy() {
 	academys = academyService.findAllAcademy();
 	return "findAllAcademy";
     }
+
+    // ajax专业查询
     private List<Major> majors;
-    //根据学院id查询专业
+    private Map<String, Object> messageAjax;
+    HttpServletResponse response = ServletActionContext.getResponse();
+    HttpServletRequest request = ServletActionContext.getRequest();
+
+    // 根据学院id查询专业
     public String findMajorByAcademyId() throws IOException {
 	majors = academyService.findMajorByAcademyId(academy.getA_id());
-	HttpServletResponse response = ServletActionContext.getResponse();
-	response.setContentType("text/html;charset=UTF-8");
+	messageAjax = new HashMap<String,Object>();
+	messageAjax.put("majors", majors);
 	if (majors != null) {
-//	    response.getWriter().println("<font color='red'>用户ID已存在</font>");
 	    System.out.println("=============有数据");
 	} else {
-	    System.out.println("=============没查到");
-//	    response.getWriter().println("<font color='green'>用户ID可以使用</font>");
+	    System.out.println("=============没数据");
 	}
-	return NONE;
+	return SUCCESS;
     }
-    
-    
-    
 
     public List<Academy> getAcademys() {
-        return academys;
+	return academys;
     }
 
     public void setAcademys(List<Academy> academys) {
-        this.academys = academys;
+	this.academys = academys;
     }
 
     public Academy getAcademy() {
-        return academy;
+	return academy;
     }
 
     public void setAcademy(Academy academy) {
-        this.academy = academy;
+	this.academy = academy;
     }
-    
-    
 
+    public List<Major> getMajors() {
+	return majors;
+    }
+
+    public void setMajors(List<Major> majors) {
+	this.majors = majors;
+    }
+
+    public Map<String, Object> getMessageAjax() {
+        return messageAjax;
+    }
+
+    public void setMessageAjax(Map<String, Object> messageAjax) {
+        this.messageAjax = messageAjax;
+    }
+
+    
 }

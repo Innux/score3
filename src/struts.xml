@@ -7,7 +7,7 @@
 
     <constant name="struts.devMode" value="false" />
 
-	<package name="score3" extends="struts-default" namespace="/">
+	<package name="score3" extends="struts-default,json-default" namespace="/">
 	
 		<!-- 配置管理员的Action -->
 		<action name="admin_*" class="adminAction" method="{1}">
@@ -23,7 +23,10 @@
         <!-- 学院Action-->
          <action name="academy_*" class="academyAction" method="{1}">  
          	<!-- 在slideBar点击新建学生 请求学院数据 -->       
-            <result name="findAllAcademy">/WEB-INF/jsp/createStu.jsp</result>    
+            <result name="findAllAcademy">/WEB-INF/jsp/createStu.jsp</result>
+            <result name="success" type="json">
+            	<param name="messageAjax">messageAjax</param>
+            </result>    
         </action>
 		
 	</package>

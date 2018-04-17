@@ -45,6 +45,8 @@
 				<value>com/lut/vo/Academy.hbm.xml</value>
 				<value>com/lut/vo/Major.hbm.xml</value>
 				<value>com/lut/vo/Clazz.hbm.xml</value>
+				<value>com/lut/vo/scoreNcourse/Course.hbm.xml</value>
+				<value>com/lut/vo/scoreNcourse/Score.hbm.xml</value>
 			</list>
 		</property>
 	</bean>

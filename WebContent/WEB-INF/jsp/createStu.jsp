@@ -122,8 +122,9 @@
                                     <div class="span10 field-box">
                                         <label>专业:</label>
                                         <div class="ui-select span5">
+<!-- ====================major选择器============= -->
                                             <select id="majorId">
-                                                <option value="0">请选择</option>  
+                                                <option value="0">请选择</option>        
                                             </select>
                                         </div>
                                     </div>
@@ -166,29 +167,34 @@
 
 
 	<!-- scripts -->
-    <script src="js/jquery-latest.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/theme.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery-latest.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/theme.js"></script>
     <script type="text/javascript">
-    
+ 
     function findAllMajor() {
-    	var acaSelect = document.getElementById("academyId");
+        var acaSelect = document.getElementById("academyId");
     	var index = acaSelect.selectedIndex;
-    	var academyId = acaSelect.options[index].value;
+    	var academyId = acaSelect.options[index].value; 
+    	 /* var academyId = $("#academyId").attr("value");  */
+    	/* var academyId=$("#select option:selected").val(); */
+    	
     	
     	var xhr = createXmlHttp();
     	xhr.onreadystatechange = function(){
     		if(xhr.readyState == 4) {
     			if(xhr.status == 200) {
-    				document.getElementById("span1").innerHTML = xhr.responseText;
+    				/* document.getElementById("span1").innerHTML = xhr.responseText; */
+    				document.getElementById("span1").innerHTML = "";
     			}
     		}
     	}
     	xhr.open("GET",
-    			"${pageContext.request.contextPath}/academy_findAllMajor.action?time="
+    			"${pageContext.request.contextPath}/academy_findMajorByAcademyId.action?time="
     					+new Date().getTime()+"&a_id="+academyId,true);
     	xhr.send(null);
     }
+
     
     
     function checkStuLoginName() {
@@ -197,7 +203,7 @@
     	xhr.onreadystatechange = function(){
     		if(xhr.readyState == 4) {
     			if(xhr.status == 200) {
-    				document.getElementById("span1").innerHTML = xhr.responseText;
+    				document.getElementById("span2").innerHTML = xhr.responseText;
     			}
     		}
     	}
