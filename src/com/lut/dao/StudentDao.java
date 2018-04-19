@@ -27,6 +27,8 @@ public class StudentDao extends HibernateDaoSupport {
 	}
 	return null;
     }
+    
+  
 
     public List<Student> list() {
 	String hql = "from Student";

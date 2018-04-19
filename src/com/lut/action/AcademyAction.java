@@ -1,9 +1,8 @@
 package com.lut.action;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.io.PrintWriter;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,8 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.ServletActionContext;
 
 import com.lut.service.AcademyService;
+import com.lut.utils.JsonUtils;
 import com.lut.vo.Academy;
+import com.lut.vo.Clazz;
 import com.lut.vo.Major;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -40,22 +42,41 @@ public class AcademyAction extends ActionSupport implements ModelDriven<Academy>
     }
 
     // ajax专业查询
-    private List<Major> majors;
-    private Map<String, Object> messageAjax;
+    private List<Major> majorList;
+    private List<Clazz> clazzList;
     HttpServletResponse response = ServletActionContext.getResponse();
     HttpServletRequest request = ServletActionContext.getRequest();
 
     // 根据学院id查询专业
     public String findMajorByAcademyId() throws IOException {
-	majors = academyService.findMajorByAcademyId(academy.getA_id());
-	messageAjax = new HashMap<String,Object>();
-	messageAjax.put("majors", majors);
-	if (majors != null) {
-	    System.out.println("=============有数据");
-	} else {
-	    System.out.println("=============没数据");
-	}
-	return SUCCESS;
+	String aid = request.getParameter("aid").trim();
+	majorList = academyService.findMajorByAcademyId(Integer.parseInt(aid));
+	response.setContentType("text/html;charset=UTF-8");
+	String result = JsonUtils.toJson(majorList);
+	// 打印转化出来的json
+	System.out.println(result);
+	ActionContext.getContext().put("majors", majorList);
+	PrintWriter out = response.getWriter();
+	out.print(result);
+	out.flush();
+	out.close();
+	return NONE;
+    }
+    
+    // 根据专业id查询班级
+    public String findClassByMajorId() throws IOException {
+	String mid = request.getParameter("mid").trim();
+	clazzList = academyService.findClassByMajorId(Integer.parseInt(mid));
+	response.setContentType("text/html;charset=UTF-8");
+	String result = JsonUtils.toJson(clazzList);
+	// 打印转化出来的json
+	System.out.println(result);
+	ActionContext.getContext().put("clazzs", clazzList);
+	PrintWriter out = response.getWriter();
+	out.print(result);
+	out.flush();
+	out.close();
+	return NONE;
     }
 
     public List<Academy> getAcademys() {
@@ -74,21 +95,22 @@ public class AcademyAction extends ActionSupport implements ModelDriven<Academy>
 	this.academy = academy;
     }
 
-    public List<Major> getMajors() {
-	return majors;
+    public List<Major> getMajorList() {
+	return majorList;
     }
 
-    public void setMajors(List<Major> majors) {
-	this.majors = majors;
+    public void setMajorList(List<Major> majorList) {
+	this.majorList = majorList;
     }
 
-    public Map<String, Object> getMessageAjax() {
-        return messageAjax;
+    public List<Clazz> getClazzList() {
+        return clazzList;
     }
 
-    public void setMessageAjax(Map<String, Object> messageAjax) {
-        this.messageAjax = messageAjax;
+    public void setClazzList(List<Clazz> clazzList) {
+        this.clazzList = clazzList;
     }
-
     
+    
+
 }

@@ -14,9 +14,9 @@
 		<property name="number"/>
 		<property name="age"/>
 		<property name="sex"/>
-		<property name="academyId"/>
-		<property name="majorId"/>
-		<property name="classId"/>
+		<many-to-one name="academy" lazy="false" class="com.lut.vo.Academy" column="academyId"></many-to-one>
+		<many-to-one name="major" lazy="false" class="com.lut.vo.Major" column="majorId"></many-to-one>
+		<many-to-one name="clazz" lazy="false" class="com.lut.vo.Clazz" column="classId"></many-to-one>
 		<property name="type"/>
 		
 		

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.lut.vo.Academy;
+import com.lut.vo.Clazz;
 import com.lut.vo.Major;
 
 public class AcademyDao extends HibernateDaoSupport {
@@ -20,6 +21,16 @@ public class AcademyDao extends HibernateDaoSupport {
 	List<Major> majors = this.getHibernateTemplate().find(hql, mid);
 	if (majors.size() != 0) {
 	    return majors;
+	} else {
+	    return null;
+	}
+    }
+
+    public List<Clazz> findClassByMajorId(Integer classId) {
+	String hql = "from Clazz where m_id=?";
+	List<Clazz> clazzs = this.getHibernateTemplate().find(hql,classId);
+	if (clazzs.size() != 0) {
+	    return clazzs;
 	} else {
 	    return null;
 	}

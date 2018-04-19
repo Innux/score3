@@ -115,8 +115,15 @@
 						</s:else>
 					</li>
 					<!-- 选页 -->
-						<li><a class="active" href="#">1</a></li>
-						<li><a href="#">2</a></li>
+						<!-- <li><a class="active" href="#">1</a></li>
+						<li><a href="#">2</a></li> -->
+						<s:bean name="org.apache.struts2.util.Counter" id="counter">
+						    <s:param name="first" value="1" />
+						    <s:param name="last" value="pageBean.totalPage" />
+						    <s:iterator>
+						        <li><a href="${ pageContext.request.contextPath }/stu_findAll.action?page=<s:property/>"><s:property/></a></li>
+						    </s:iterator>
+						</s:bean>
 					<!-- 选页end -->
 					<!-- 下一页 -->
 						<!-- <li><a href="#">&#8250;</a></li> -->

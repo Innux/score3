@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Detail Admin - User list</title>
+<title>Score List</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -62,7 +62,7 @@
 							</select>
 						</div>
 						<div class="ui-select span1">
-							<select>
+							<select onchange="findAllJson()" id="halfId" name="halfId">
 								<option value="0">学期</option>
 								<option value="1">上学期</option>
 								<option value="2">下学期</option>
@@ -109,44 +109,39 @@
 								<th class="span3 sortable"><span class="line"></span>操作</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="tBody">
 							<!-- row -->
-							<tr class="">
-								<td>2017</td>
-								<td>上学期</td>
-								<td>张三</td>
-								<td>软件工程</td>
-								<td>2</td>
-								<td>编译原理</td>
-								<td>88</td>
-								<td><a href="#">编辑</a> <a href="#">删除</a></td>
-							</tr>
 							<s:iterator var="sco" value="pageBean.list" status="status">
 								<tr>
 									<td>
 										<s:property value="#sco.s_year"/>
 									</td>
 									<td>
-										<s:property value="#sco.s_half"/>
+										<s:if test="#sco.s_half == 1">
+											上学期
+										</s:if>
+										<s:else>
+											下学期
+										</s:else>
 									</td>
 									<td>
 										<s:property value="#sco.student.name"/>
 									</td>
 									<td>
-										<s:property value="#sco.student.name"/>
+										<s:property value="#sco.student.major.m_name"/>
 									</td>
 									<td>
-										<s:property value="#sco.student.name"/>
+										<s:property value="#sco.student.clazz.class_name"/>
 									</td>
 									<td>
-										<s:property value="#sco.student.name"/>
+										<s:property value="#sco.course.c_name"/>
 									</td>
 									<td>
 										<s:property value="#sco.s_score"/>
 									</td>
 									<td>
 										<a href="#">编辑</a>
-										<a href="#">删除</a>
+<a href="${ pageContext.request.contextPath }/score_delete.action?s_id=<s:property value="#sco.s_id"/>">删除</a>
 									</td>
 								</tr>
 							</s:iterator>
@@ -163,21 +158,26 @@
 					<!--  上一页-->
 					<li>
 						<s:if test="pageBean.page != 1">
-<a href="${ pageContext.request.contextPath }/stu_findAll.action?page=<s:property value="pageBean.page-1"/>">&#8249;</a>
+<a href="${ pageContext.request.contextPath }/score_findAll.action?page=<s:property value="pageBean.page-1"/>">&#8249;</a>
 						</s:if>
 						<s:else>
 						<a href="#">&#8249;</a>
 						</s:else>
 					</li>
 					<!-- 选页 -->
-						<li><a class="active" href="#">1</a></li>
-						<li><a href="#">2</a></li>
+						<s:bean name="org.apache.struts2.util.Counter" id="counter">
+						    <s:param name="first" value="1" />
+						    <s:param name="last" value="pageBean.totalPage" />
+						    <s:iterator>
+						        <li><a href="${ pageContext.request.contextPath }/score_findAll.action?page=<s:property/>"><s:property/></a></li>
+						    </s:iterator>
+						</s:bean>
 					<!-- 选页end -->
 					<!-- 下一页 -->
 						<!-- <li><a href="#">&#8250;</a></li> -->
 						<li>
 						<s:if test="pageBean.page != pageBean.totalPage">
-<a href="${ pageContext.request.contextPath }/stu_findAll.action?page=<s:property value="pageBean.page+1"/>">&#8250;</a>
+<a href="${ pageContext.request.contextPath }/score_findAll.action?page=<s:property value="pageBean.page+1"/>">&#8250;</a>
 						</s:if>
 						<s:else>
 						<a href="#">&#8250;</a>
@@ -197,6 +197,29 @@
 	<script src="js/jquery-latest.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/theme.js"></script>
+	<script type="text/javascript">
+	function findAllJson() {  
+		var sYear = document.getElementById("yearId").value;
+        var sHalf = document.getElementById("halfId").value;        
+        var url = "score_findAllJson.action?sHalf=" + sHalf;  
+        $.ajax( {  
+            type : "POST",  
+            url : url,  
+            data : {},  
+            dataType : "JSON",  
+            success : function(data) {  
+            	$("#tBody").append("<option value='0'>请选择</option>");
+                //data为后台返回的Json信息  
+                for(var n=0;n<data.length;n++){  
+                 	var ids=data[n].class_id;  
+                    var names=data[n].class_name;  
+                    $("#clazzId").append("<tr><td>"+names+"</td></tr>");  
+                    }  
+            }  
+        })  
+    } 
+     
+	</script>
 
 </body>
 </html>

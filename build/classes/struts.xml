@@ -23,14 +23,12 @@
         <!-- 学院Action-->
          <action name="academy_*" class="academyAction" method="{1}">  
          	<!-- 在slideBar点击新建学生 请求学院数据 -->       
-            <result name="findAllAcademy">/WEB-INF/jsp/createStu.jsp</result>
-            <result name="success" type="json">
-            	<param name="messageAjax">messageAjax</param>
-            </result>    
+            <result name="findAllAcademy">/WEB-INF/jsp/createStu.jsp</result>  
         </action>
         <!-- 成绩 -->
         <action name="score_*" class="scoreAction" method="{1}">      
             <result name="findAll">/WEB-INF/jsp/scoreList.jsp</result>   
+            <result name="deleteSuccess" type="redirectAction">score_findAll.action?page=1</result>
         </action>
 		
 	</package>

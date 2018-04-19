@@ -108,7 +108,7 @@
                                     <div class="span10 field-box">
                                         <label>学院:</label>
                                         <div class="ui-select span5">
-                                            <select onchange="findAllMajor()" id="academyId">
+                                            <select onchange="findMajorByAcademyId()" id="academyId" name="academyId">
                                             	<option value="0">请选择</option>  
                                           	 	<s:iterator value="academys" var="aca">
 													<option value="<s:property value="#aca.a_id"/>">
@@ -123,7 +123,7 @@
                                         <label>专业:</label>
                                         <div class="ui-select span5">
 <!-- ====================major选择器============= -->
-                                            <select id="majorId">
+                                            <select onchange="findClassByMajorId()" id="majorId" name="majorId">
                                                 <option value="0">请选择</option>        
                                             </select>
                                         </div>
@@ -131,7 +131,7 @@
                                     <div class="span10 field-box">
                                         <label>班级:</label>
                                         <div class="ui-select span5">
-                                            <select>
+                                            <select id="clazzId" name="clazzId">
                                                 <option value="0">请选择</option>  
                                             </select>
                                         </div>
@@ -172,28 +172,51 @@
     <script src="${pageContext.request.contextPath}/js/theme.js"></script>
     <script type="text/javascript">
  
-    function findAllMajor() {
-        var acaSelect = document.getElementById("academyId");
-    	var index = acaSelect.selectedIndex;
-    	var academyId = acaSelect.options[index].value; 
-    	 /* var academyId = $("#academyId").attr("value");  */
-    	/* var academyId=$("#select option:selected").val(); */
-    	
-    	
-    	var xhr = createXmlHttp();
-    	xhr.onreadystatechange = function(){
-    		if(xhr.readyState == 4) {
-    			if(xhr.status == 200) {
-    				/* document.getElementById("span1").innerHTML = xhr.responseText; */
-    				document.getElementById("span1").innerHTML = "";
-    			}
-    		}
-    	}
-    	xhr.open("GET",
-    			"${pageContext.request.contextPath}/academy_findMajorByAcademyId.action?time="
-    					+new Date().getTime()+"&a_id="+academyId,true);
-    	xhr.send(null);
-    }
+    function findClassByMajorId() {  
+        $("#clazzId").empty();//清空  
+        var mid = document.getElementById("majorId").value;  
+        var url = "academy_findClassByMajorId.action?mid=" + mid;  
+        $.ajax( {  
+            type : "POST",  
+            url : url,  
+            data : {},  
+            dataType : "JSON",  
+            success : function(data) {  
+            	$("#clazzId").append("<option value='0'>请选择</option>");
+                //data为后台返回的Json信息  
+                for(var n=0;n<data.length;n++){  
+                 	var ids=data[n].class_id;  
+                    var names=data[n].class_name;  
+                    $("#clazzId").append("<option value='"+ids+"'>"+names+"</option>");  
+                    }  
+            }  
+        })  
+    } 
+    
+    
+    
+    function findMajorByAcademyId() {  
+        $("#majorId").empty();//清空  
+        var aid = document.getElementById("academyId").value;  
+        var url = "academy_findMajorByAcademyId.action?aid=" + aid;  
+        $.ajax( {  
+            type : "POST",  
+            url : url,  
+            data : {},  
+            dataType : "JSON",  
+            success : function(data) {  
+            	 $("#majorId").append("<option value='0'>请选择</option>");
+                //data为后台返回的Json信息  
+                for(var n=0;n<data.length;n++){  
+                 	var ids=data[n].m_id;  
+                    var names=data[n].m_name;  
+                    $("#majorId").append("<option value='"+ids+"'>"+names+"</option>");  
+                    }  
+            }  
+        })  
+    } 
+    
+    
 
     
     
