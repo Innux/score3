@@ -55,7 +55,20 @@
 					<h3>学生列表</h3>
 					<div class="span10 pull-right">
 						<input type="text" class="span5 search" placeholder="输入姓名..." />
-						<a class="btn-flat ">搜索</a> <a href="new-user.html"
+						<a class="btn-flat ">搜索</a> 
+<!--===================测试功能  -->
+							<div class="ui-select span1">
+							<select id="majorId" name="major.m_id" onchange="findStuByMajorId()">
+								<option value="0">专业</option>
+								<s:iterator var="maj" value="majorList">
+									<option value="<s:property value="#maj.m_id"/>">
+										<s:property value="#maj.m_name"/>
+									</option>
+								</s:iterator>   	
+							</select>
+						</div>
+						
+						<a href="${pageContext.request.contextPath }/stu_addPage.action"
 							class="btn-flat success pull-right"> <span>&#43;</span> 添加学生
 						</a>
 					</div>
@@ -63,17 +76,18 @@
 
 				<!-- Users table -->
 				<div class="row-fluid table">
-					<table class="table table-hover">
+					<table class="table table-hover" id="table1">
 						<thead>
 							<tr>
 								<th class="span3 sortable">用户名</th>
 								<th class="span3 sortable"><span class="line"></span>姓名</th>
+								<th class="span3 sortable"><span class="line"></span>学号</th>
 								<th class="span3 sortable"><span class="line"></span>性别</th>
-								<th class="span3 sortable"><span class="line"></span>年龄</th>
+								<th class="span3 sortable"><span class="line"></span>专业</th>
 								<th class="span3 sortable"><span class="line"></span>操作</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="tbody1">
 							<!-- row -->
 							<s:iterator var="stu" value="pageBean.list" status="status">
 								<tr>
@@ -84,19 +98,27 @@
 										<s:property value="#stu.name"/>
 									</td>
 									<td>
-										<s:property value="#stu.sex"/>
+										<s:property value="#stu.number"/>
+									</td>
+									
+									<td>
+										<s:if test="#stu.sex == 1">
+											男
+										</s:if>
+										<s:else>
+											女
+										</s:else>
 									</td>
 									<td>
-										<s:property value="#stu.age"/>
+										<s:property value="#stu.major.m_name"/>
 									</td>
+									
 									<td>
 										<a href="#">编辑</a>
-										<a href="#">删除</a>
+<a href="${ pageContext.request.contextPath }/stu_delete.action?id=<s:property value="#stu.id"/>">删除</a>
 									</td>
 								</tr>
-							</s:iterator>
-							
-							
+							</s:iterator>		
 						</tbody>
 					</table>
 				</div>
@@ -145,9 +167,38 @@
 
 
 	<!-- scripts -->
-	<script src="js/jquery-latest.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/theme.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery-latest.js"></script>
+	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/theme.js"></script>
+	<script type="text/javascript">
+ 
+    function findStuByMajorId() {  
+        $("#tbody1").remove();
+        var tbody1 = document.getElementBYId("tbody1");
+        var table1 = document.getElementById("table1");
+        table1.removeChild(tbody1);
+        var tbody2 = document.createElement("tbody");
+        table1.appendChild(tbody2);
+       
+        var mid = document.getElementById("majorId").value;  
+        var url = "stu_findStuByMajorId.action?mid=" + mid;  
+        $.ajax( {  
+            type : "POST",  
+            url : url,  
+            data : {},  
+            dataType : "JSON",  
+            success : function(data) {  
+            	tbody2.append("<tr><td>zhangsan</td></tr>");
+                //data为后台返回的Json信息  
+           /*      for(var n=0;n<data.length;n++){  
+                 	var ids=data[n].class_id;  
+                    var names=data[n].class_name;  
+                    $("#clazzId").append("<option value='"+ids+"'>"+names+"</option>");  
+                    }  */ 
+            }  
+        })  
+    } 
+    </script>
 
 </body>
 </html>

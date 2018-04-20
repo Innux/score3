@@ -14,20 +14,9 @@ public class AcademyService {
     public void setAcademyDao(AcademyDao academyDao) {
 	this.academyDao = academyDao;
     }
-
-    public List<Academy> findAllAcademy() {
-	List<Academy> academys = academyDao.findAllAcademy();
-	return academys;
-    }
-
-    public List<Major> findMajorByAcademyId(Integer mid) {
-	List<Major> majors = academyDao.findMajorByAcademyId(mid);
-	return majors;
-    }
-
-    public List<Clazz> findClassByMajorId(Integer classId) {
-	List<Clazz> clazzs = academyDao.findClassByMajorId(classId);
-	return clazzs;
+    
+    public List<Academy> findAll() {
+	return academyDao.findAll();
     }
 
 }

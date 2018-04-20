@@ -20,7 +20,7 @@
             </a>
             <ul class="submenu">
                 <li><a href="${pageContext.request.contextPath }/stu_findAll.action?page=1">学生查询</a></li>
-                <li><a href="${pageContext.request.contextPath }/academy_findAllAcademy.action">新增学生</a></li>
+                <li><a href="${pageContext.request.contextPath }/stu_addPage.action">新增学生</a></li>
             </ul>
         </li>
         <li>

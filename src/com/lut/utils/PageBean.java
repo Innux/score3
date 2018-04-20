@@ -3,11 +3,11 @@ package com.lut.utils;
 import java.util.List;
 
 public class PageBean<T> {
-    private int page; // 当前页数currentPage
-    private int totalCount; // 总记录数totalRecord
+    private int page; // 当前页数
+    private int totalCount; // 总记录数
     private int totalPage; // 总页数
-    private int limit; // 每页显示的记录数pageSize
-    private List<T> list; // 每页显示数据的集合.dataList
+    private int limit; // 每页显示的记录数
+    private List<T> list; // 每页显示数据的集合
 
     public int getPage() {
 	return page;

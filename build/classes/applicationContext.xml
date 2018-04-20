@@ -70,6 +70,9 @@
 	<!-- 学生的Action -->
 	<bean id="studentAction" class="com.lut.action.StudentAction" scope="prototype">
 		<property name="studentService" ref="studentService"></property>
+		<property name="academyService" ref="academyService"></property>
+		<property name="majorService" ref="majorService"></property>
+		<property name="clazzService" ref="clazzService"></property>
 	</bean>
 	<!-- 学院action（一级分类） -->
 	<bean id="academyAction" class="com.lut.action.AcademyAction" scope="prototype">
@@ -97,6 +100,14 @@
 	<bean id="scoreService" class="com.lut.service.ScoreService">
 		<property name="scoreDao" ref="scoreDao" />
 	</bean>
+	<!-- 专业 -->
+	<bean id="majorService" class="com.lut.service.MajorService">
+		<property name="majorDao" ref="majorDao" />
+	</bean>
+	<!-- 班级 -->
+	<bean id="clazzService" class="com.lut.service.ClazzService">
+		<property name="clazzDao" ref="clazzDao" />
+	</bean>
 
 
 	<!--================ Dao的配置 =========================== -->
@@ -113,6 +124,12 @@
 	</bean>
 	<!-- 成绩 -->
 	<bean id="scoreDao" class="com.lut.dao.ScoreDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="majorDao" class="com.lut.dao.MajorDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="clazzDao" class="com.lut.dao.ClazzDao">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 

@@ -63,11 +63,12 @@
                     <!-- left column -->
                     <div class="span9 with-sidebar">
                         <div class="container">
+<!-- ==========================表单========= -->
                             <form class="new_user_form" 
-                            action="${pageContext.request.contextPath }/stu_createStu.action"
+                            action="${pageContext.request.contextPath }/stu_save.action"
                              method="post" novalidate="novalidate">
                                 <div class="span10 field-box">
-                                    <label>用户ID:</label>
+                                    <label>用户名:</label>
                                     <input id="loginName" name="loginName"
                                     class="span7" data-toggle="tooltip"
                                            data-trigger="focus" title="用户名为学生学号"
@@ -77,14 +78,18 @@
                                 </div>
                                 <div class="span10 field-box">
                                     <label>密码:</label>
-                                    <!--<input class="span9" type="text" placeholder="默认为学号"/>-->
-                                    <input class="span7 " data-toggle="tooltip"
+                                    <input id="loginPwd" name="loginPwd" 
+                                    class="span7 " data-toggle="tooltip"
                                            data-trigger="focus" title="密码默认为学号"
                                            data-placement="right" type="text" />
                                 </div>
                                     <div class="span10 field-box">
                                         <label>姓名:</label>
-                                        <input name="name" class="span7" type="text" />
+                                        <input id="name" name="name" class="span7" type="text" />
+                                    </div>
+                                     <div class="span10 field-box">
+                                        <label>学号:</label>
+                                        <input id="number" name="number" class="span7" type="text" />
                                     </div>
                                     <div class="span10 field-box">
                                         <label>年龄:</label>
@@ -95,22 +100,23 @@
                                         <label>性别:</label>
                                         <div class="span7">
                                             <label class="radio">
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" />
+                                                <input type="radio" name="sex" id="optionsRadios1" value="1" checked="" />
                                                 男
                                             </label>
                                             <label class="radio">
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" />
+                                                <input type="radio" name="sex" id="optionsRadios2" value="2" />
                                                 女
                                             </label>
                                         </div>
                                     </div>
-<!--====================== 选择器====================== -->
+
                                     <div class="span10 field-box">
                                         <label>学院:</label>
                                         <div class="ui-select span5">
-                                            <select onchange="findMajorByAcademyId()" id="academyId" name="academyId">
-                                            	<option value="0">请选择</option>  
-                                          	 	<s:iterator value="academys" var="aca">
+  <!--====================== 学院选择====================== --> 
+                                            <select id="academyId" name="academy.a_id" onchange="findMajorByAcademyId()" >
+                                            	<option value="0">请选择</option>                                            	 
+                                          	 	<s:iterator value="academyList" var="aca">
 													<option value="<s:property value="#aca.a_id"/>">
 														<s:property value="#aca.a_name"/>
 													</option>
@@ -122,8 +128,8 @@
                                     <div class="span10 field-box">
                                         <label>专业:</label>
                                         <div class="ui-select span5">
-<!-- ====================major选择器============= -->
-                                            <select onchange="findClassByMajorId()" id="majorId" name="majorId">
+<!-- ====================专业选择============= -->
+                                            <select id="majorId" name="major.m_id" onchange="findClassByMajorId()" >
                                                 <option value="0">请选择</option>        
                                             </select>
                                         </div>
@@ -131,14 +137,16 @@
                                     <div class="span10 field-box">
                                         <label>班级:</label>
                                         <div class="ui-select span5">
-                                            <select id="clazzId" name="clazzId">
+<!-- ====================班级选择============= -->                                        
+                                            <select id="clazzId" name="clazz.class_id">
                                                 <option value="0">请选择</option>  
                                             </select>
                                         </div>
                                     </div>
 
                                     <div class="span2 field-box">
-                                        <input type="button" class="btn-flat primary" value="确认" />
+ <!--=========表单提交============  -->
+                                        <input type="submit" class="btn-flat primary" value="确认" />
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -175,7 +183,7 @@
     function findClassByMajorId() {  
         $("#clazzId").empty();//清空  
         var mid = document.getElementById("majorId").value;  
-        var url = "academy_findClassByMajorId.action?mid=" + mid;  
+        var url = "stu_findClazzByMajorId.action?mid=" + mid;  
         $.ajax( {  
             type : "POST",  
             url : url,  
@@ -198,7 +206,7 @@
     function findMajorByAcademyId() {  
         $("#majorId").empty();//清空  
         var aid = document.getElementById("academyId").value;  
-        var url = "academy_findMajorByAcademyId.action?aid=" + aid;  
+        var url = "stu_findMajorByAcademyId.action?aid=" + aid;  
         $.ajax( {  
             type : "POST",  
             url : url,  

@@ -13,12 +13,15 @@
 		<action name="admin_*" class="adminAction" method="{1}">
             <result name="loginSuccess">/WEB-INF/jsp/index.jsp</result>              
             <result name="loginFailed">/</result>           
-           <!--  <result name="jump2addStu">/WEB-INF/jsp/createStu.jsp</result>    -->   
+          
         </action>
         <!-- 学生Action -->
         <action name="stu_*" class="studentAction" method="{1}">         
-            <result name="findAll">/WEB-INF/jsp/userList.jsp</result>  
-            <result name="list">/WEB-INF/jsp/userList.jsp</result>     
+            <result name="findAll">/WEB-INF/jsp/userList.jsp</result>
+            <result name="addPageSuccess">/WEB-INF/jsp/createStu.jsp</result>
+            <result name="saveSuccess" type="redirectAction">stu_findAll.action?page=1</result> 
+            <result name="deleteSuccess" type="redirectAction">stu_findAll.action?page=1</result>  
+               
         </action>
         <!-- 学院Action-->
          <action name="academy_*" class="academyAction" method="{1}">  

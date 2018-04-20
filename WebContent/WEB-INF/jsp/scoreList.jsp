@@ -58,7 +58,6 @@
 								<option value="0">学年</option>
 								<option value="1">2014</option>
 								<option value="2">2015</option>
-
 							</select>
 						</div>
 						<div class="ui-select span1">
@@ -80,13 +79,6 @@
 								<option value="0">班级</option>
 								<option value="1">1</option>
 								<option value="2">2</option>
-							</select>
-						</div>
-						<div class="ui-select span1">
-							<select>
-								<option value="0">科目</option>
-								<option value="1">Java</option>
-								<option value="2">编译原理</option>
 							</select>
 						</div>
 
