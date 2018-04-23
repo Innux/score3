@@ -53,15 +53,18 @@
 				<div class="row-fluid header">
 					<h3>成绩列表</h3>
 					<div class="span10 pull-right">
+					<form action="${pageContext.request.contextPath }/score_findBySearchModel.action?page=1"
+                             method="post" novalidate="novalidate">
 						<div class="ui-select span1">
-							<select>
+							<select name="sYear">
 								<option value="0">学年</option>
-								<option value="1">2014</option>
-								<option value="2">2015</option>
+								<option value="2014">2014</option>
+								<option value="2015">2015</option>
+								<option value="2016">2016</option>
 							</select>
 						</div>
 						<div class="ui-select span1">
-							<select onchange="findAllJson()" id="halfId" name="halfId">
+							<select id="halfId" name="sHalf">
 								<option value="0">学期</option>
 								<option value="1">上学期</option>
 								<option value="2">下学期</option>
@@ -81,9 +84,10 @@
 								<option value="2">2</option>
 							</select>
 						</div>
-
+						 <input type="submit" class="btn-flat primary" value="确认" />
+						</form>
 					</div>
-
+ 
 				</div>
 
 				<!-- Users table -->

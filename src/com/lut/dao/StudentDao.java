@@ -28,15 +28,15 @@ public class StudentDao extends HibernateDaoSupport {
 	}
 	return null;
     }
-    
+
     public int findCountMajorId(Integer majorId) {
 	String hql = "select count(*) from Student stu where stu.major.m_id = ?";
 	List<Long> list = this.getHibernateTemplate().find(hql, majorId);
-	if(list != null && list.size() > 0){
-		return list.get(0).intValue();
+	if (list != null && list.size() > 0) {
+	    return list.get(0).intValue();
 	}
 	return 0;
-     }
+    }
 
     // 根据专业id查询学生信息
     public List<Student> findByPageMajorId(Integer mid, int begin, int limit) {
@@ -79,7 +79,25 @@ public class StudentDao extends HibernateDaoSupport {
     public Student findByStuId(Integer id) {
 	return this.getHibernateTemplate().get(Student.class, id);
     }
-    
- 
+
+    public int findCountName(String stuName) {
+	String hql = "select count(*) from Student s where s.name like '%" + stuName + "%'";
+	List<Long> list = this.getHibernateTemplate().find(hql.toString());
+	if (list != null && list.size() > 0) {
+	    return list.get(0).intValue();
+	}
+	return 0;
+    }
+
+    public List<Student> findByPageName(String stuName, int begin, int limit) {
+	String hql = "select s from Student s where s.name like '%"+ stuName +"%'";
+	List<Student> list = this.getHibernateTemplate()
+		.execute(new PageHibernateCallback<Student>(hql.toString(), new Object[] { }, begin, limit));
+	
+	if (list != null && list.size() > 0) {
+	    return list;
+	}
+	return null;
+    }
 
 }

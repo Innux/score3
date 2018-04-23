@@ -132,14 +132,14 @@ public class StudentAction extends ActionSupport implements ModelDriven<Student>
 	return "saveSuccess";
     }
 
-    // 查询所有学生信息+筛选器专业信息
+    // 查询所有学生信息+筛选器专业信息初始化
     public String findAll() {
 	PageBean<Student> pageBean = studentService.findByPage(page);
 	// 将PageBean数据存入到值栈中.
 	ActionContext.getContext().getValueStack().set("pageBean", pageBean);
-	
-	List<Major> majorList = majorService.findAll();
-	ActionContext.getContext().getValueStack().set("majorList", majorList);
+
+//	List<Major> majorList = majorService.findAll();
+//	ActionContext.getContext().getValueStack().set("majorList", majorList);
 	// 页面跳转
 	return "findAll";
     }
@@ -152,40 +152,25 @@ public class StudentAction extends ActionSupport implements ModelDriven<Student>
 	ActionContext.getContext().getValueStack().set("pageBean", pageBean);
 	return "findByMajorId";
     }
-    //ajax  根据专业id查询学生
+
+    // ajax 根据专业id查询学生
     public String findByMajorIdAjax() throws IOException {
 	String mid = request.getParameter("mid").trim();
-	System.out.println("=========" + mid);
-	// 根据二级分类查询商品
 	PageBean<Student> pageBean = studentService.findByPageMajorId(Integer.parseInt(mid), page);
-	// 将PageBean存入到值栈中:
 	ActionContext.getContext().getValueStack().set("pageBean", pageBean);
-	
-	
-	List<Student> stuList = pageBean.getList();
-	response.setContentType("text/html;charset=UTF-8");
-	String result = JsonUtils.toJson(stuList);
-	// 打印转化出来的json
-	System.out.println(result);
-	ActionContext.getContext().put("stuList", stuList);
-	PrintWriter out = response.getWriter();
-	out.print(result);
-	out.flush();
-	out.close();
-	return NONE;
+	return "findSuccess";
     }
 
     // 删除学生
     public String delete() {
 	// 根据id查询商品信息
 	student = studentService.findByStuId(student.getId());
-	// 删除数据库中商品记录:
 	studentService.delete(student);
 	// 页面跳转
 	return "deleteSuccess";
     }
 
-    // Ajax使用
+    // Ajax检测用户名是否存在
     public String findByStuLoginName() throws IOException {
 	// 调用service进行查询
 	Student existStu = studentService.findByStuLoginName(student.getLoginName());
@@ -197,6 +182,14 @@ public class StudentAction extends ActionSupport implements ModelDriven<Student>
 	    response.getWriter().println("<font color='green'>用户ID可以使用</font>");
 	}
 	return NONE;
+    }
+
+    public String findByStuName() {
+	String stuName = request.getParameter("name").trim();
+	PageBean<Student> pageBean = studentService.findByStuName(stuName, page);
+	ActionContext.getContext().getValueStack().set("pageBean", pageBean);
+	System.out.println(pageBean.getList().get(0).getLoginName());
+	return "findByStuName";
     }
 
 }

@@ -53,10 +53,29 @@ public class ScoreAction extends ActionSupport implements ModelDriven<Score> {
     public String delete() {
 	// 根据id查询商品信息
 	score = scoreService.findByScoreId(score.getS_id());
-	// 删除数据库中商品记录:
 	scoreService.delete(score);
 	// 页面跳转
 	return "deleteSuccess";
+    }
+
+    public String findBySearchModel() {
+	Score searchModel = new Score();
+	String sYear = request.getParameter("sYear");
+
+	Integer sHalf = null;
+	String sHalfStr = request.getParameter("sHalf");
+	if (sHalfStr != null && !"".equals(sHalfStr.trim())) {
+	    sHalf = Integer.parseInt(sHalfStr);
+	}
+	
+	searchModel.setS_year(sYear);
+	searchModel.setS_half(sHalf);
+
+//	PageBean<Score> pageBean = scoreService.findByPage(page);
+	PageBean<Score> pageBean = scoreService.findByPage(searchModel, page);
+	// 将PageBean数据存入到值栈中.
+	ActionContext.getContext().getValueStack().set("pageBean", pageBean);
+	return "findBySearchModel";
     }
 
 }

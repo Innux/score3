@@ -21,7 +21,8 @@
             <result name="addPageSuccess">/WEB-INF/jsp/createStu.jsp</result>
             <result name="saveSuccess" type="redirectAction">stu_findAll.action?page=1</result> 
             <result name="deleteSuccess" type="redirectAction">stu_findAll.action?page=1</result>  
-               
+            <result name="findSuccess" type="redirectAction">stu_findAll.action?page=1</result>
+             <result name="findByStuName">/WEB-INF/jsp/userList.jsp</result>
         </action>
         <!-- 学院Action-->
          <action name="academy_*" class="academyAction" method="{1}">  
@@ -32,6 +33,7 @@
         <action name="score_*" class="scoreAction" method="{1}">      
             <result name="findAll">/WEB-INF/jsp/scoreList.jsp</result>   
             <result name="deleteSuccess" type="redirectAction">score_findAll.action?page=1</result>
+            <result name="findBySearchModel">/WEB-INF/jsp/scoreList.jsp</result> 
         </action>
 		
 	</package>
