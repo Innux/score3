@@ -84,6 +84,20 @@ public class StudentAction extends ActionSupport implements ModelDriven<Student>
 	this.page = page;
     }
 
+    // 登录
+    public String login() {
+	Student user = studentService.login(student);
+	if (user != null) {
+	    int type = user.getType();
+	    if (type == 1) {
+		return "loginSuccess_stu";
+	    } else if(type == 2){
+		return "loginSuccess_admin";
+	    }
+	}
+	return "loginFailed";
+    }
+
     // 跳转到添加学生的页面
     public String addPage() {
 	List<Academy> academyList = academyService.findAll();
@@ -138,8 +152,9 @@ public class StudentAction extends ActionSupport implements ModelDriven<Student>
 	// 将PageBean数据存入到值栈中.
 	ActionContext.getContext().getValueStack().set("pageBean", pageBean);
 
-//	List<Major> majorList = majorService.findAll();
-//	ActionContext.getContext().getValueStack().set("majorList", majorList);
+	// List<Major> majorList = majorService.findAll();
+	// ActionContext.getContext().getValueStack().set("majorList",
+	// majorList);
 	// 页面跳转
 	return "findAll";
     }

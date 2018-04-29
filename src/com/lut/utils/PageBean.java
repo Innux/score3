@@ -8,6 +8,7 @@ public class PageBean<T> {
     private int totalPage; // 总页数
     private int limit; // 每页显示的记录数
     private List<T> list; // 每页显示数据的集合
+ 
 
     public int getPage() {
 	return page;

@@ -9,7 +9,6 @@
 			<generator class="native"/>
 		</id>
 		<property name="m_name"/>
-		<!-- 专业（二级分类）与学院（一级分类）的关联 -->
 		<many-to-one name="academy" lazy="false" class="com.lut.vo.Academy" column="a_id"></many-to-one>
 	</class>
 </hibernate-mapping>

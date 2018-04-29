@@ -27,15 +27,14 @@ public class AdminAction extends ActionSupport implements ModelDriven<Admin> {
 	Admin existAdmin = adminService.login(admin);
 
 	if (existAdmin == null) {
-	    // 登陆失败
-	    this.addActionError("登陆失败：用户名或密码错误用户未激活！");
-	    return "loginFailed";
+	    // 登陆失败 先用作学生登录
+	    return "loginSuccess2";
 	} else {
 	    // 登陆成功
 	    // 将用户的信息存入session中
 	    ServletActionContext.getRequest().getSession().setAttribute("existAdmin", existAdmin);
 	    // 页面跳转
-	    return "loginSuccess";
+	    return "loginSuccess1";
 	}
     }
     

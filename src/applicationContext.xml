@@ -47,6 +47,7 @@
 				<value>com/lut/vo/Clazz.hbm.xml</value>
 				<value>com/lut/vo/scoreNcourse/Course.hbm.xml</value>
 				<value>com/lut/vo/scoreNcourse/Score.hbm.xml</value>
+				<value>com/lut/vo/dztNprize/Dzt.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -81,6 +82,13 @@
 	<!-- 成绩 -->
 	<bean id="scoreAction" class="com.lut.action.ScoreAction" scope="prototype">
 		<property name="scoreService" ref="scoreService"></property>
+		<property name="majorService" ref="majorService"></property>
+		<property name="clazzService" ref="clazzService"></property>
+	</bean>
+	<!-- 德智体 -->
+	<bean id="dztAction" class="com.lut.action.DztAction" scope="prototype">
+		<property name="dztService" ref="dztService"></property>
+		<property name="majorService" ref="majorService"></property>
 	</bean>
 
 
@@ -108,6 +116,10 @@
 	<bean id="clazzService" class="com.lut.service.ClazzService">
 		<property name="clazzDao" ref="clazzDao" />
 	</bean>
+	<!-- 德智体 -->
+	<bean id="dztService" class="com.lut.service.DztService">
+		<property name="dztDao" ref="dztDao" />
+	</bean>
 
 
 	<!--================ Dao的配置 =========================== -->
@@ -130,6 +142,9 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<bean id="clazzDao" class="com.lut.dao.ClazzDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="dztDao" class="com.lut.dao.DztDao">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 

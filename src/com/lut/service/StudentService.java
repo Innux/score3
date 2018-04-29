@@ -16,6 +16,10 @@ public class StudentService {
     public void setStudentDao(StudentDao studentDao) {
 	this.studentDao = studentDao;
     }
+    
+    public Student login(Student student) {
+	return studentDao.login(student);
+    }
 
     public PageBean<Student> findByPage(Integer page) {
 	PageBean<Student> pageBean = new PageBean<Student>();
@@ -119,5 +123,9 @@ public class StudentService {
 	pageBean.setList(list);
 	return pageBean;
     }
+
+
+
+
 
 }

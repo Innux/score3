@@ -42,15 +42,15 @@
             <div class="content-wrap">
                 <h6>学生科创成绩管理系统</h6>
                  <form id="loginForm" 
-                 action="${pageContext.request.contextPath }/admin_login.action" 
+                 action="${pageContext.request.contextPath }/stu_login.action" 
                  method="post" novalidate="novalidate">
-	                <input id="name" name="name" class="span12" type="text" placeholder="用户名" />
-	                <input id="pwd" name="pwd" class="span12" type="password" placeholder="密码" />
+	                <input id="name" name="loginName" class="span12" type="text" placeholder="用户名" />
+	                <input id="pwd" name="loginPwd" class="span12" type="password" placeholder="密码" />
 	         	    <a href="#" class="forgot">忘记密码?</a>
-	                <div class="remember">
+	              <!--   <div class="remember">
 	                    <input id="remember-me" type="checkbox" />
 	                    <label for="remember-me">记住我</label>
-	                </div>
+	                </div> -->
 	                <input class="btn-glow primary login" type="submit" value="登录"/>
                 </form> 
             </div>

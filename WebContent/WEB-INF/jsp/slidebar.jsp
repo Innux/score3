@@ -3,13 +3,13 @@
 <div id="sidebar-nav">
     <ul id="dashboard-menu">
         <li class="active">
-            <div class="pointer">
+            <!-- <div class="pointer">
                 <div class="arrow"></div>
                 <div class="arrow_border"></div>
-            </div>
+            </div> -->
             <a href="#">
                 <i class="icon-home"></i>
-                <span>个人中心</span>
+                <span>主页</span>
             </a>
         </li>
         <li>
@@ -30,8 +30,8 @@
                 <i class="icon-chevron-down"></i>
             </a>
             <ul class="submenu">
-                <li><a href="${pageContext.request.contextPath }/score_findAll.action?page=1">成绩查询</a></li>
-                <li><a href="#">新增成绩</a></li>
+                <li><a href="${pageContext.request.contextPath }/score_findAll.action?page=1">学科成绩查询</a></li>
+                <li><a href="${pageContext.request.contextPath }/dzt_findBySearchModel.action?page=1">德智体成绩查询</a></li>
                 <li><a href="#">德智体综合排名</a></li>
             </ul>
         </li>

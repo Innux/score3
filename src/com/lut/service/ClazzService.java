@@ -16,4 +16,8 @@ public class ClazzService {
     public List<Clazz> findByMajorId(Integer majorId) {
 	return clazzDao.findByMajorId(majorId);
     }
+
+    public List<Clazz> findAll() {
+	return clazzDao.findAll();
+    }
 }

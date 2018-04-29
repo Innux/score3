@@ -16,4 +16,13 @@ public class ClazzDao extends HibernateDaoSupport{
   	}
   	return null;
       }
+
+    public List<Clazz> findAll() {
+	String hql = "from Clazz";
+  	List<Clazz> list = this.getHibernateTemplate().find(hql);
+  	if (list != null && list.size() > 0) {
+  	    return list;
+  	}
+  	return null;
+    }
 }

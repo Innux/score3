@@ -46,7 +46,7 @@
         <div class="container-fluid">
             <div id="pad-wrapper" class="new-user">
                 <div class="row-fluid header">
-                    <h3>新增学生</h3>
+                    <h3>添加成绩</h3>
                 </div>
 
                 <div class="row-fluid form-wrapper">
@@ -55,65 +55,35 @@
                         <div class="container">
 <!-- ==========================表单========= -->
                             <form class="new_user_form" 
-                            action="${pageContext.request.contextPath }/stu_save.action"
+                            action="${pageContext.request.contextPath }/score_save.action"
                              method="post" novalidate="novalidate">
-                                <div class="span10 field-box">
-                                    <label>用户名:</label>
-                                    <input id="loginName" name="loginName"
-                                    class="span7" data-toggle="tooltip"
-                                           data-trigger="focus" title="用户名默认为学生学号"
-                                           data-placement="right" type="text" 
-                                           onblur="checkStuLoginName()"/>
-                                           <span id="span1"></span>
-                                </div>
-                                <div class="span10 field-box">
-                                    <label>密码:</label>
-                                    <input id="loginPwd" name="loginPwd" 
-                                    class="span7 " data-toggle="tooltip"
-                                           data-trigger="focus" title="密码默认为学号"
-                                           data-placement="right" type="text" />
-                                </div>
+			                        <div class="ui-select span5">
+										<select name="sYear" >
+											<option value="">学年</option>
+											<!-- <option value="2014">2014</option> -->
+											<option value="2015">2015</option>
+											<option value="2016">2016</option>
+										</select>
+									</div>
+									<div class="ui-select span5">
+										<select name="sHalf">
+											<option value="">学期</option>
+											<option value="1">上学期</option>
+											<option value="2">下学期</option>
+										</select>
+									</div>
                                     <div class="span10 field-box">
-                                        <label>姓名:</label>
-                                        <input id="name" name="name" class="span7" type="text" />
-                                    </div>
-                                     <div class="span10 field-box">
                                         <label>学号:</label>
-                                        <input id="number" name="number" class="span7" type="text" />
+                                        <input name="stuNumber" class="span7" type="text" />
+                                        <span>张三</span>
                                     </div>
                                     <div class="span10 field-box">
-                                        <label>年龄:</label>
-                                        <input name="age" class="span7" type="text" />
+                                        <label>分数:</label>
+                                        <input name="sScore" class="span7" type="text" />
                                     </div>
 
-                                    <div class="span10 field-box">
-                                        <label>性别:</label>
-                                        <div class="span7">
-                                            <label class="radio">
-                                                <input type="radio" name="sex" id="optionsRadios1" value="1" checked="" />
-                                                男
-                                            </label>
-                                            <label class="radio">
-                                                <input type="radio" name="sex" id="optionsRadios2" value="2" />
-                                                女
-                                            </label>
-                                        </div>
-                                    </div>
-<input type="hidden" name="type" value="1"/>
-                                    <div class="span10 field-box">
-                                        <label>学院:</label>
-                                        <div class="ui-select span5">
-  <!--====================== 学院选择====================== --> 
-                                            <select id="academyId" name="academy.a_id" onchange="findMajorByAcademyId()" >
-                                            	<option value="0">请选择</option>                                            	 
-                                          	 	<s:iterator value="academyList" var="aca">
-													<option value="<s:property value="#aca.a_id"/>">
-														<s:property value="#aca.a_name"/>
-													</option>
-												</s:iterator>   		
-                                            </select>
-                                        </div>
-                                    </div>
+                                  
+                              
 
                                     <div class="span10 field-box">
                                         <label>专业:</label>

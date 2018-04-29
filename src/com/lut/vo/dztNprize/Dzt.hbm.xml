@@ -4,11 +4,15 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
     
 <hibernate-mapping>
-	<class name="com.lut.vo.Major" table="major">
-		<id name="m_id">
+	<class name="com.lut.vo.dztNprize.Dzt" table="dzt">
+		<id name="id">
 			<generator class="native"/>
 		</id>
-		<property name="m_name"/>
-		<many-to-one name="academy" lazy="false" class="com.lut.vo.Academy" column="a_id"></many-to-one>
+		<property name="year"/>
+		<property name="de"/>
+		<property name="zhi"/>
+		<property name="ti"/>
+		
+		<many-to-one name="student" lazy="false" class="com.lut.vo.Student" column="stu_id"></many-to-one>
 	</class>
 </hibernate-mapping>

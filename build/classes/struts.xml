@@ -11,18 +11,22 @@
 	
 		<!-- 配置管理员的Action -->
 		<action name="admin_*" class="adminAction" method="{1}">
-            <result name="loginSuccess">/WEB-INF/jsp/index.jsp</result>              
+            <result name="loginSuccess1">/WEB-INF/jsp/index.jsp</result>
+            <result name="loginSuccess2">/WEB-INF/jsp/index2.jsp</result>              
             <result name="loginFailed">/</result>           
           
         </action>
         <!-- 学生Action -->
-        <action name="stu_*" class="studentAction" method="{1}">         
+        <action name="stu_*" class="studentAction" method="{1}">     
+         	<result name="loginSuccess_stu">/WEB-INF/jsp/index2.jsp</result>
+            <result name="loginSuccess_admin">/WEB-INF/jsp/index.jsp</result>  
+            <result name="loginFailed">/</result>      
             <result name="findAll">/WEB-INF/jsp/userList.jsp</result>
             <result name="addPageSuccess">/WEB-INF/jsp/createStu.jsp</result>
             <result name="saveSuccess" type="redirectAction">stu_findAll.action?page=1</result> 
             <result name="deleteSuccess" type="redirectAction">stu_findAll.action?page=1</result>  
             <result name="findSuccess" type="redirectAction">stu_findAll.action?page=1</result>
-             <result name="findByStuName">/WEB-INF/jsp/userList.jsp</result>
+            <result name="findByStuName">/WEB-INF/jsp/userList.jsp</result>
         </action>
         <!-- 学院Action-->
          <action name="academy_*" class="academyAction" method="{1}">  
@@ -34,6 +38,10 @@
             <result name="findAll">/WEB-INF/jsp/scoreList.jsp</result>   
             <result name="deleteSuccess" type="redirectAction">score_findAll.action?page=1</result>
             <result name="findBySearchModel">/WEB-INF/jsp/scoreList.jsp</result> 
+        </action>
+        <!--德智体action  -->
+        <action name="dzt_*" class="dztAction" method="{1}">
+         	<result name="findBySearchModel">/WEB-INF/jsp/dztList.jsp</result>  
         </action>
 		
 	</package>

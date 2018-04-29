@@ -7,6 +7,9 @@ import java.util.Map;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.lut.utils.PageHibernateCallback;
+import com.lut.vo.Clazz;
+import com.lut.vo.Major;
+import com.lut.vo.Student;
 import com.lut.vo.scoreNcourse.Score;
 
 public class ScoreDao extends HibernateDaoSupport {
@@ -40,25 +43,47 @@ public class ScoreDao extends HibernateDaoSupport {
     }
 
     public Map<String, List<?>> findByPage(Score searchModel, int begin, int limit) {
-	String hql = "from Score where 1=1 ";
-	String countHql = "select count(*) from Score where 1=1";
+	StringBuffer hql = new StringBuffer("from Score s where 1=1 ");
+	StringBuffer countHql = new StringBuffer("select count(*) from Score s where 1=1");
+
+	String sYear = searchModel.getS_year();
+	if (sYear != null && !sYear.equals("")) {
+	    hql.append(" and s_year=" + sYear);
+	    countHql.append(" and s_year=" + sYear);
+	}
 
 	Integer sHalf = searchModel.getS_half();
-	String sHalfStr = sHalf.toString();
-	if (sHalfStr != null && !sHalfStr.equals("")) {
-	    hql = hql + " and s_half=" + sHalfStr;
-	    countHql = countHql + " and s_half=" + sHalfStr;
+	if (sHalf != null && !sHalf.equals("")) {
+	    hql.append("  and s_half=" + sHalf);
+	    countHql.append(" and s_half=" + sHalf);
 	}
-	System.out.println("===="+hql+"++++++"+countHql);
+
+	
+	if (searchModel.getStudent() != null) {
+	    Integer sMajor = searchModel.getStudent().getMajor().getM_id();
+	    if (sMajor != null && !sMajor.equals("")) {
+		hql.append(" and s.student.major.m_id=" + sMajor);
+		countHql.append(" and s.student.major.m_id=" + sMajor);
+	    }
+	}
+
+//	Clazz cla = searchModel.getStudent().getClazz();
+//	if (cla != null) {
+//	    Integer sClass = searchModel.getStudent().getClazz().getClass_id();
+//	    if (sClass != null && !sClass.equals("")) {
+//		hql.append(" and s.student.clazz.class_id=" + sClass);
+//		countHql.append(" and s.student.clazz.class_id=" + sClass);
+//	    }
+//	}
 
 	List<Long> countList = null;
 
-	countList = this.getHibernateTemplate().find(countHql);
+	countList = this.getHibernateTemplate().find(countHql.toString());
 	// list.get(0).intValue();
 
 	List<Score> scoreList = null;
 	scoreList = this.getHibernateTemplate()
-		.execute(new PageHibernateCallback<Score>(hql.toString(), new Object[]{}, begin, limit));
+		.execute(new PageHibernateCallback<Score>(hql.toString(), new Object[] {}, begin, limit));
 
 	Map<String, List<?>> map = new HashMap<>();
 	map.put("countList", countList);

@@ -96,7 +96,7 @@
                     </a>
                 </li>
                 <li class="settings hidden-phone">
-                    <a href="${pageContext.request.contextPath }/admin_login.action" role="button">
+                    <a href="${pageContext.request.contextPath }/stu_login.action" role="button">
                         <i class="icon-share-alt"></i>
                     </a>
                 </li>
