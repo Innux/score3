@@ -91,7 +91,7 @@ public class StudentAction extends ActionSupport implements ModelDriven<Student>
 	    int type = user.getType();
 	    if (type == 1) {
 		return "loginSuccess_stu";
-	    } else if(type == 2){
+	    } else if (type == 2) {
 		return "loginSuccess_admin";
 	    }
 	}
@@ -149,13 +149,7 @@ public class StudentAction extends ActionSupport implements ModelDriven<Student>
     // 查询所有学生信息+筛选器专业信息初始化
     public String findAll() {
 	PageBean<Student> pageBean = studentService.findByPage(page);
-	// 将PageBean数据存入到值栈中.
 	ActionContext.getContext().getValueStack().set("pageBean", pageBean);
-
-	// List<Major> majorList = majorService.findAll();
-	// ActionContext.getContext().getValueStack().set("majorList",
-	// majorList);
-	// 页面跳转
 	return "findAll";
     }
 
@@ -205,6 +199,17 @@ public class StudentAction extends ActionSupport implements ModelDriven<Student>
 	ActionContext.getContext().getValueStack().set("pageBean", pageBean);
 	System.out.println(pageBean.getList().get(0).getLoginName());
 	return "findByStuName";
+    }
+
+    public String edit() {
+	student = studentService.findByStuId(student.getId());
+	// 完成页面转向:将数据显示到页面上.
+	return "editSuccess";
+    }
+
+    public String update() {
+	studentService.update(student);
+	return "updateSuccess";
     }
 
 }

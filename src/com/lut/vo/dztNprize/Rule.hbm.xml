@@ -4,16 +4,13 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
     
 <hibernate-mapping>
-	<class name="com.lut.vo.dztNprize.Dzt" table="dzt">
+	<class name="com.lut.vo.dztNprize.Rule" table="rule">
 		<id name="id">
 			<generator class="native"/>
 		</id>
 		<property name="year"/>
-		<property name="de"/>
-		<property name="zhi"/>
-		<property name="ti"/>
-		<property name="avg"/>
+		<property name="level"/>
+		<property name="stunum"/>		
 		
-		<many-to-one name="student" lazy="false" class="com.lut.vo.Student" column="stu_id"></many-to-one>
 	</class>
 </hibernate-mapping>

@@ -78,12 +78,34 @@ public class DztAction extends ActionSupport implements ModelDriven<Dzt> {
 	PageBean<Dzt> pageBean = dztService.findByPage(searchModel, page);
 	ActionContext.getContext().getValueStack().set("pageBean", pageBean);
 	ActionContext.getContext().getValueStack().set("searchModel", searchModel);
-	List<Dzt> dztList = pageBean.getList();
 
 	List<Major> majorList = majorService.findAll();
 	ActionContext.getContext().getValueStack().set("majorList", majorList);
 
 	return "findBySearchModel";
     }
+    
+    public String findBySearchModelOrder() {
+   	Dzt searchModel = new Dzt();
+   	Student stu = null;
+   	Major maj = null;
+
+   	String dYear = request.getParameter("dYear");
+   	if (dYear != null && !"".equals(dYear.trim())) {
+   	    searchModel.setYear(dYear);
+   	}
+
+   	PageBean<Dzt> pageBean = dztService.findByPageOrder(searchModel, page);
+   	ActionContext.getContext().getValueStack().set("pageBean", pageBean);
+   	ActionContext.getContext().getValueStack().set("searchModel", searchModel);
+
+   	return "findBySearchModelOrder";
+       }
+    
+//    public String findLimit() {
+//	List<Dzt> dztList = dztService.findLimit("2014", "二等奖");
+//	ActionContext.getContext().getValueStack().set("dztList", dztList);
+//	return "findLimit";
+//    }
 
 }

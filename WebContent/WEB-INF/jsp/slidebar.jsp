@@ -32,7 +32,7 @@
             <ul class="submenu">
                 <li><a href="${pageContext.request.contextPath }/score_findAll.action?page=1">学科成绩查询</a></li>
                 <li><a href="${pageContext.request.contextPath }/dzt_findBySearchModel.action?page=1">德智体成绩查询</a></li>
-                <li><a href="#">德智体综合排名</a></li>
+                <li><a href="${pageContext.request.contextPath }/dzt_findBySearchModelOrder.action?page=1">德智体综合排名</a></li>
             </ul>
         </li>
         <li>
@@ -42,8 +42,8 @@
                 <i class="icon-chevron-down"></i>
             </a>
             <ul class="submenu">
-                <li><a href="#">奖学金设定</a></li>
-                <li><a href="#">获奖学生列表</a></li>
+                <li><a href="${pageContext.request.contextPath }/rule_findAll.action?page=1">奖学金设定</a></li>
+                <li><a href="${pageContext.request.contextPath }/prize_findBySearchModel.action?page=1">获奖学生列表</a></li>
             </ul>
         </li>
 

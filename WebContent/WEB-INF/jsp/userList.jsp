@@ -59,19 +59,6 @@
 				<input type="text" name="name" id="name" class="span5 search" placeholder="输入姓名..." /> &nbsp; 
 				<input type="submit" class="btn-flat" value="查询">
 		</form>
-<!--===================测试功能  -->
-<%-- <form>
-							<div class="ui-select span1">
-							<select id="majorId" name="major.m_id" onchange="findByMajorIdAjax()">
-								<option value="0">专业</option>
-								<s:iterator var="maj" value="majorList">
-									<option value="<s:property value="#maj.m_id"/>">
-										<s:property value="#maj.m_name"/>
-									</option>
-								</s:iterator>   	
-							</select>
-						</div>
-</form> --%>
 						
 						<a href="${pageContext.request.contextPath }/stu_addPage.action"
 							class="btn-flat success pull-right"> <span>&#43;</span> 添加学生
@@ -119,7 +106,7 @@
 									</td>
 									
 									<td>
-										<a href="#">编辑</a>
+<a href="${ pageContext.request.contextPath }/stu_edit.action?id=<s:property value="#stu.id"/>">编辑</a>
 <a href="${ pageContext.request.contextPath }/stu_delete.action?id=<s:property value="#stu.id"/>">删除</a>
 									</td>
 								</tr>

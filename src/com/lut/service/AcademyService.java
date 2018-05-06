@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.lut.dao.AcademyDao;
 import com.lut.vo.Academy;
-import com.lut.vo.Clazz;
-import com.lut.vo.Major;
 
 public class AcademyService {
 

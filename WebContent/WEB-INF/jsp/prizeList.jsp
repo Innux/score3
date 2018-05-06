@@ -53,17 +53,17 @@
 		<div class="container-fluid">
 			<div id="pad-wrapper" class="users-list">
 				<div class="row-fluid header">
-					<h3>德智体成绩列表</h3>
-					<!-- <div class="span10 pull-right"> -->
-					<form action="${pageContext.request.contextPath }/dzt_findBySearchModel.action?page=1"
-                             method="post" novalidate="novalidate" class="pull-right">
+					<h3>获奖学生列表</h3>
+					<div class="span10 pull-right">
+					<form action="${pageContext.request.contextPath }/prize_findBySearchModel.action?page=1"
+                             method="post" novalidate="novalidate" >
 						<div class="ui-select span1">
-							<select name="dYear" >
-								<s:if test="!searchModel.year">
+							<select name="pYear" >
+								<s:if test="!searchModel.rule.year">
 									<option value="">学年</option>
 								</s:if>
 								<s:else>
-									<option value="<s:property value="searchModel.year"/>"><s:property value="searchModel.year"/></option>
+									<option value="<s:property value="searchModel.rule.year"/>"><s:property value="searchModel.rule.year"/></option>
 									<option value="">全部</option>
 								</s:else>	
 								<option value="2014">2014</option>
@@ -72,31 +72,19 @@
 								<option value="2017">2017</option>
 							</select>
 						</div>
-						
-						<div class="ui-select span1">
-							<select name="dMajor">
-								<s:if test="!searchModel.student">
-									<option value="">专业</option>
-								</s:if>
-								<s:else>
-									<option value="<s:property value="searchModel.student.major.m_id"/>">
-										<s:property value="searchModel.student.major.m_name"/>
-									</option>
-									<option value="">全部</option>
-								</s:else>
-								
-								 <s:iterator value="majorList" var="maj">
-									<option value="<s:property value="#maj.m_id"/>">
-										<s:property value="#maj.m_name"/>
-									</option>
-								</s:iterator> 
-							</select>
-						</div>
+
 						 <input type="submit" class="btn-flat primary" value="确认" />
 						</form>
-				<!-- 	</div> -->
- 
+						
+						<a href="${pageContext.request.contextPath }/prize_refresh.action?page=1"
+							class="btn-flat success pull-right"> <i class="icon-refresh"></i>刷新列表
+						</a>
+					</div>
+					<!-- <div class="span10 pull-right"> -->
+					
+						
 				</div>
+					
 
 				<!-- Users table -->
 				<div class="row-fluid table">
@@ -104,50 +92,32 @@
 						<thead>
 							<tr>
 								<th class="span3 sortable">学年</th>
+								<th class="span3 sortable"><span class="line"></span>奖项</th>
 								<th class="span3 sortable"><span class="line"></span>专业</th>
 								<th class="span3 sortable"><span class="line"></span>班级</th>
 								<th class="span3 sortable"><span class="line"></span>姓名</th>
-								<th class="span3 sortable"><span class="line"></span>德育</th>
-								<th class="span3 sortable"><span class="line"></span>智育</th>
-								<th class="span3 sortable"><span class="line"></span>体育</th>
-								<th class="span3 sortable"><span class="line"></span>平均分</th>
-								<th class="span3 sortable"><span class="line"></span>操作</th>
 							</tr>
 						</thead>
 						<tbody id="tBody">
 							<!-- row -->
-							<s:iterator var="dzt" value="pageBean.list" status="status">
+							<s:iterator var="prize" value="pageBean.list" status="status">
 								<tr>
 									<td>
-										<s:property value="#dzt.year"/>
+										<s:property value="#prize.rule.year"/>
 									</td>
 									<td>
-										<s:property value="#dzt.student.major.m_name"/>
+										<s:property value="#prize.rule.level"/>
 									</td>
 									<td>
-										<s:property value="#dzt.student.clazz.class_name"/>
+										<s:property value="#prize.student.major.m_name"/>
 									</td>
 									<td>
-										<s:property value="#dzt.student.name"/>
+										<s:property value="#prize.student.clazz.class_name"/>
 									</td>
 									<td>
-										<s:property value="#dzt.de"/>
-									</td>
-									<td>
-										<s:property value="#dzt.zhi"/>
-									</td>
-									<td>
-										<s:property value="#dzt.ti"/>
-									</td>
-									<td>
-										<%-- <s:property value="(#dzt.ti+#dzt.zhi+#dzt.de)/3"/> --%>
-										<%-- <fmt:formatNumber value="${(dzt.ti+dzt.de+dzt.zhi)/3}" pattern="0.00"/> --%>
-										<fmt:formatNumber value="${dzt.avg}" pattern="0.00"/>
-									</td>
-									<td>
-										<a href="#">编辑</a>
-<a href="${ pageContext.request.contextPath }/dzt_delete.action?s_id=<s:property value="#dzt.id"/>">删除</a>
-									</td>
+										<s:property value="#prize.student.name"/>
+									</td>		
+								
 								</tr>
 							</s:iterator>
 							<!-- row -->
@@ -156,14 +126,14 @@
 					</table>
 				</div>
 				<!--================= 分页======================== -->
-第<s:property value="pageBean.page"/>/<s:property value="pageBean.totalPage"/>页 
+ 第<s:property value="pageBean.page"/>/<s:property value="pageBean.totalPage"/>页 
 				<!-- =============================== -->
 				<div class="pagination pull-right">
 					<ul>
 					<!--  上一页-->
 					<li>
 						<s:if test="pageBean.page != 1">
-<a href="${ pageContext.request.contextPath }/dzt_findBySearchModel.action?page=<s:property value="pageBean.page-1"/>&dYear=<s:property value="searchModel.year"/>&dMajor=<s:property value="searchModel.student.major.m_id"/>">&#8249;</a>
+<a href="${ pageContext.request.contextPath }/rule_findByModel.action?page=<s:property value="pageBean.page-1"/>&pYear=<s:property value="searchModel.rule.year"/>">&#8249;</a>
 					</s:if>
 						<s:else>
 						<a href="#">&#8249;</a>
@@ -174,7 +144,7 @@
 						    <s:param name="first" value="1" />
 						    <s:param name="last" value="pageBean.totalPage" />
 						    <s:iterator>
-						        <li><a href="${ pageContext.request.contextPath }/dzt_findBySearchModel.action?page=<s:property/>&dYear=<s:property value="searchModel.year"/>&dMajor=<s:property value="searchModel.student.major.m_id"/>"><s:property/></a></li>
+						        <li><a href="${ pageContext.request.contextPath }/rule_findByModel.action?page=<s:property/>&pYear=<s:property value="searchModel.rule.year"/>"><s:property/></a></li>
 						    </s:iterator>
 						</s:bean>
 					<!-- 选页end -->
@@ -182,14 +152,14 @@
 					
 						<li>
 						<s:if test="pageBean.page != pageBean.totalPage">
-<a href="${ pageContext.request.contextPath }/dzt_findBySearchModel.action?page=<s:property value="pageBean.page+1"/>&dYear=<s:property value="searchModel.year"/>&dMajor=<s:property value="searchModel.student.major.m_id"/>">&#8250;</a>
+<a href="${ pageContext.request.contextPath }/rule_findByModel.action?page=<s:property value="pageBean.page+1"/>&pYear=<s:property value="searchModel.rule.year"/>">&#8250;</a>
 						</s:if>
 						<s:else>
 						<a href="#">&#8250;</a>
 						</s:else>
 						</li>
 					</ul>
-				</div>
+				</div> 
 	<!--===================  -->
 			
 			</div>

@@ -12,6 +12,7 @@
 		<property name="de"/>
 		<property name="zhi"/>
 		<property name="ti"/>
+		<property name="avg"/>
 		
 		<many-to-one name="student" lazy="false" class="com.lut.vo.Student" column="stu_id"></many-to-one>
 	</class>

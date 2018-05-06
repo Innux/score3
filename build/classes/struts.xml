@@ -10,12 +10,12 @@
 	<package name="score3" extends="struts-default,json-default" namespace="/">
 	
 		<!-- 配置管理员的Action -->
-		<action name="admin_*" class="adminAction" method="{1}">
+		<!-- <action name="admin_*" class="adminAction" method="{1}">
             <result name="loginSuccess1">/WEB-INF/jsp/index.jsp</result>
             <result name="loginSuccess2">/WEB-INF/jsp/index2.jsp</result>              
             <result name="loginFailed">/</result>           
           
-        </action>
+        </action> -->
         <!-- 学生Action -->
         <action name="stu_*" class="studentAction" method="{1}">     
          	<result name="loginSuccess_stu">/WEB-INF/jsp/index2.jsp</result>
@@ -27,6 +27,8 @@
             <result name="deleteSuccess" type="redirectAction">stu_findAll.action?page=1</result>  
             <result name="findSuccess" type="redirectAction">stu_findAll.action?page=1</result>
             <result name="findByStuName">/WEB-INF/jsp/userList.jsp</result>
+            <result name="editSuccess">/WEB-INF/jsp/editStu.jsp</result>
+            <result name="updateSuccess" type="redirectAction">stu_findAll.action?page=1</result>
         </action>
         <!-- 学院Action-->
          <action name="academy_*" class="academyAction" method="{1}">  
@@ -41,7 +43,23 @@
         </action>
         <!--德智体action  -->
         <action name="dzt_*" class="dztAction" method="{1}">
-         	<result name="findBySearchModel">/WEB-INF/jsp/dztList.jsp</result>  
+         	<result name="findBySearchModel">/WEB-INF/jsp/dztList.jsp</result> 
+         	<result name="findBySearchModelOrder">/WEB-INF/jsp/dztOrder.jsp</result>
+         	<result name="findLimit">/WEB-INF/jsp/dztLimit.jsp</result>    
+        </action>
+        <!-- 规则 -->
+         <action name="rule_*" class="ruleAction" method="{1}">
+         	<result name="findAll">/WEB-INF/jsp/ruleList.jsp</result>  
+         	<result name="deleteSuccess" type="redirectAction">rule_findAll.action?page=1</result>
+         	 <result name="editSuccess">/WEB-INF/jsp/editRule.jsp</result>
+            <result name="updateSuccess" type="redirectAction">rule_findAll.action?page=1</result>
+            <result name="saveSuccess" type="redirectAction">rule_findAll.action?page=1</result> 
+            <result name="addSuccess">/WEB-INF/jsp/addRule.jsp</result>
+        </action>
+        
+          <action name="prize_*" class="prizeAction" method="{1}">
+         	<result name="refreshSuccess">/WEB-INF/jsp/prizeList.jsp</result>
+         	<result name="findSuccess">/WEB-INF/jsp/prizeList.jsp</result>     	
         </action>
 		
 	</package>

@@ -48,6 +48,8 @@
 				<value>com/lut/vo/scoreNcourse/Course.hbm.xml</value>
 				<value>com/lut/vo/scoreNcourse/Score.hbm.xml</value>
 				<value>com/lut/vo/dztNprize/Dzt.hbm.xml</value>
+				<value>com/lut/vo/dztNprize/Rule.hbm.xml</value>
+				<value>com/lut/vo/dztNprize/Prize.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -65,9 +67,9 @@
 	<!--============== Action的配置 =========================== -->
 
 	<!-- 管理员的Action -->
-	<bean id="adminAction" class="com.lut.action.AdminAction" scope="prototype">
+	<!-- <bean id="adminAction" class="com.lut.action.AdminAction" scope="prototype">
 		<property name="adminService" ref="adminService"></property>
-	</bean>
+	</bean> -->
 	<!-- 学生的Action -->
 	<bean id="studentAction" class="com.lut.action.StudentAction" scope="prototype">
 		<property name="studentService" ref="studentService"></property>
@@ -90,12 +92,21 @@
 		<property name="dztService" ref="dztService"></property>
 		<property name="majorService" ref="majorService"></property>
 	</bean>
+	
+	<bean id="ruleAction" class="com.lut.action.RuleAction" scope="prototype">
+		<property name="ruleService" ref="ruleService"></property>
+		<property name="prizeService" ref="prizeService"></property>
+	</bean>
+	
+	<bean id="prizeAction" class="com.lut.action.PrizeAction" scope="prototype">
+		<property name="prizeService" ref="prizeService"></property>
+	</bean>
 
 
 	<!-- ==============Service的配置 =========================== -->
-	<bean id="adminService" class="com.lut.service.AdminService">
+<!-- 	<bean id="adminService" class="com.lut.service.AdminService">
 		<property name="adminDao" ref="adminDao" />
-	</bean>
+	</bean> -->
 	<!-- StudentService配置 -->
 	<bean id="studentService" class="com.lut.service.StudentService">
 		<property name="studentDao" ref="studentDao" />
@@ -119,13 +130,26 @@
 	<!-- 德智体 -->
 	<bean id="dztService" class="com.lut.service.DztService">
 		<property name="dztDao" ref="dztDao" />
+		<property name="ruleDao" ref="ruleDao" />
 	</bean>
+	
+	<bean id="ruleService" class="com.lut.service.RuleService">
+		<property name="ruleDao" ref="ruleDao" />
+	</bean>
+	
+	<bean id="prizeService" class="com.lut.service.PrizeService">
+		<property name="dztDao" ref="dztDao" />
+		<property name="ruleDao" ref="ruleDao" />
+		<property name="prizeDao" ref="prizeDao" />
+	</bean>
+	
+	
 
 
 	<!--================ Dao的配置 =========================== -->
-	<bean id="adminDao" class="com.lut.dao.AdminDao">
+	<!-- <bean id="adminDao" class="com.lut.dao.AdminDao">
 		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
+	</bean> -->
 	<!-- 学生dao配置 -->
 	<bean id="studentDao" class="com.lut.dao.StudentDao">
 		<property name="sessionFactory" ref="sessionFactory" />
@@ -145,6 +169,12 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<bean id="dztDao" class="com.lut.dao.DztDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="ruleDao" class="com.lut.dao.RuleDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="prizeDao" class="com.lut.dao.PrizeDao">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 

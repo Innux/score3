@@ -16,7 +16,7 @@ public class StudentService {
     public void setStudentDao(StudentDao studentDao) {
 	this.studentDao = studentDao;
     }
-    
+
     public Student login(Student student) {
 	return studentDao.login(student);
     }
@@ -123,9 +123,5 @@ public class StudentService {
 	pageBean.setList(list);
 	return pageBean;
     }
-
-
-
-
 
 }

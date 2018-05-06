@@ -9,6 +9,15 @@ public class Dzt {
     private Float zhi;
     private Float ti;
     private Student student;
+    private Float avg;
+
+    public Float getAvg() {
+	return avg;
+    }
+
+    public void setAvg(Float avg) {
+	this.avg = (de+zhi+ti)/3;
+    }
 
     public Integer getId() {
 	return id;
