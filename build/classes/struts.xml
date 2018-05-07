@@ -13,8 +13,7 @@
 		<!-- <action name="admin_*" class="adminAction" method="{1}">
             <result name="loginSuccess1">/WEB-INF/jsp/index.jsp</result>
             <result name="loginSuccess2">/WEB-INF/jsp/index2.jsp</result>              
-            <result name="loginFailed">/</result>           
-          
+            <result name="loginFailed">/</result>                   
         </action> -->
         <!-- 学生Action -->
         <action name="stu_*" class="studentAction" method="{1}">     
@@ -51,15 +50,25 @@
          <action name="rule_*" class="ruleAction" method="{1}">
          	<result name="findAll">/WEB-INF/jsp/ruleList.jsp</result>  
          	<result name="deleteSuccess" type="redirectAction">rule_findAll.action?page=1</result>
-         	 <result name="editSuccess">/WEB-INF/jsp/editRule.jsp</result>
+         	<result name="editSuccess">/WEB-INF/jsp/editRule.jsp</result>
             <result name="updateSuccess" type="redirectAction">rule_findAll.action?page=1</result>
             <result name="saveSuccess" type="redirectAction">rule_findAll.action?page=1</result> 
             <result name="addSuccess">/WEB-INF/jsp/addRule.jsp</result>
         </action>
-        
+        <!-- 获奖列表 -->
           <action name="prize_*" class="prizeAction" method="{1}">
          	<result name="refreshSuccess">/WEB-INF/jsp/prizeList.jsp</result>
          	<result name="findSuccess">/WEB-INF/jsp/prizeList.jsp</result>     	
+        </action>
+          <!-- 公告 -->
+          <action name="notice_*" class="noticeAction" method="{1}">
+         	<result name="findSuccess">/WEB-INF/jsp/znotice.jsp</result>  
+         	<result name="addPage">/WEB-INF/jsp/zAddNotice.jsp</result>  
+         	<result name="deleteSuccess" type="redirectAction">notice_findByPage.action?page=1</result>
+         	<result name="editSuccess">/WEB-INF/jsp/zEditNotice.jsp</result>
+            <result name="updateSuccess" type="redirectAction">notice_findByPage.action?page=1</result>
+            <result name="saveSuccess" type="redirectAction">notice_findByPage.action?page=1</result> 
+            <result name="showSuccess">/WEB-INF/jsp/zcontent.jsp</result>   	
         </action>
 		
 	</package>

@@ -50,6 +50,7 @@
 				<value>com/lut/vo/dztNprize/Dzt.hbm.xml</value>
 				<value>com/lut/vo/dztNprize/Rule.hbm.xml</value>
 				<value>com/lut/vo/dztNprize/Prize.hbm.xml</value>
+				<value>com/lut/vo/Notice.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -92,15 +93,20 @@
 		<property name="dztService" ref="dztService"></property>
 		<property name="majorService" ref="majorService"></property>
 	</bean>
-	
+	<!-- 奖学金评定规则 -->
 	<bean id="ruleAction" class="com.lut.action.RuleAction" scope="prototype">
 		<property name="ruleService" ref="ruleService"></property>
 		<property name="prizeService" ref="prizeService"></property>
 	</bean>
-	
+	<!-- 获奖学生列表 -->
 	<bean id="prizeAction" class="com.lut.action.PrizeAction" scope="prototype">
 		<property name="prizeService" ref="prizeService"></property>
 	</bean>
+	<!-- 公告 -->
+	<bean id="noticeAction" class="com.lut.action.NoticeAction" scope="prototype">
+		<property name="noticeService" ref="noticeService"></property>
+	</bean>
+	
 
 
 	<!-- ==============Service的配置 =========================== -->
@@ -132,15 +138,19 @@
 		<property name="dztDao" ref="dztDao" />
 		<property name="ruleDao" ref="ruleDao" />
 	</bean>
-	
+	<!-- 奖学金评定规则 -->
 	<bean id="ruleService" class="com.lut.service.RuleService">
 		<property name="ruleDao" ref="ruleDao" />
 	</bean>
-	
+	<!-- 获奖学生列表 -->
 	<bean id="prizeService" class="com.lut.service.PrizeService">
 		<property name="dztDao" ref="dztDao" />
 		<property name="ruleDao" ref="ruleDao" />
 		<property name="prizeDao" ref="prizeDao" />
+	</bean>
+	<!-- 公告 -->
+	<bean id="noticeService" class="com.lut.service.NoticeService">
+		<property name="noticeDao" ref="noticeDao" />
 	</bean>
 	
 	
@@ -175,6 +185,9 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<bean id="prizeDao" class="com.lut.dao.PrizeDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="noticeDao" class="com.lut.dao.NoticeDao">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 

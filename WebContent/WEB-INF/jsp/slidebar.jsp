@@ -50,12 +50,12 @@
         <li>
             <a class="dropdown-toggle" href="#">
                 <i class="icon-bullhorn"></i>
-                <span>留言板/公告</span>
+                <span>公告/留言板</span>
                 <i class="icon-chevron-down"></i>
             </a>
             <ul class="submenu">
-                <li><a href="#">留言板</a></li>
-                <li><a href="#">发布公告</a></li>
+            	<li><a href="${pageContext.request.contextPath }/notice_findByPage.action?page=1">公告</a></li>
+                <li><a href="#">留言板</a></li>            
             </ul>
         </li>
     </ul>

@@ -140,7 +140,7 @@
 						</s:bean>
 					<!-- 选页end -->
 					<!-- 下一页 -->
-						<!-- <li><a href="#">&#8250;</a></li> -->
+						
 						<li>
 						<s:if test="pageBean.page != pageBean.totalPage">
 <a href="${ pageContext.request.contextPath }/stu_findAll.action?page=<s:property value="pageBean.page+1"/>">&#8250;</a>

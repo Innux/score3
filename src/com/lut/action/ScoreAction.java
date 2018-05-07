@@ -74,7 +74,6 @@ public class ScoreAction extends ActionSupport implements ModelDriven<Score> {
     }
 
     public String delete() {
-	// 根据id查询商品信息
 	score = scoreService.findByScoreId(score.getS_id());
 	scoreService.delete(score);
 	return "deleteSuccess";
@@ -84,13 +83,13 @@ public class ScoreAction extends ActionSupport implements ModelDriven<Score> {
 	Score searchModel = new Score();
 	Student stu = null;
 	Major maj = null;
-//	Clazz cla = new Clazz();
+	// Clazz cla = new Clazz();
 
 	String sYear = request.getParameter("sYear");
 	if (sYear != null && !"".equals(sYear.trim())) {
 	    searchModel.setS_year(sYear);
 	}
-	
+
 	Integer sHalf = null;
 	String sHalfStr = request.getParameter("sHalf");
 	if (sHalfStr != null && !"".equals(sHalfStr.trim())) {

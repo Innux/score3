@@ -172,10 +172,8 @@ public class StudentAction extends ActionSupport implements ModelDriven<Student>
 
     // 删除学生
     public String delete() {
-	// 根据id查询商品信息
 	student = studentService.findByStuId(student.getId());
 	studentService.delete(student);
-	// 页面跳转
 	return "deleteSuccess";
     }
 
