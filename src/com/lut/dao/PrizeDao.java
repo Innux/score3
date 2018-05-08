@@ -67,4 +67,13 @@ public class PrizeDao extends HibernateDaoSupport {
 	return map;
     }
 
+    public List<Prize> findByStuId(int id) {
+	String hql = "from Prize where stu_id=?";
+	List<Prize> list = this.getHibernateTemplate().find(hql,id);
+	if (list != null && list.size() > 0) {
+	    return list;
+	}
+	return null;
+    }
+
 }

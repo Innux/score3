@@ -40,49 +40,42 @@
     <!-- navbar -->
 	<%@ include file="navbar.jsp"%>
 	<!-- sidebar -->
-	<%@ include file="slidebar.jsp"%>
+	<s:if test='#session.user.type == 1'>
+		<%@ include file="slidebar2.jsp"%>
+	</s:if>
+	<s:else>
+		<%@ include file="slidebar.jsp"%>
+	</s:else>
+	
 
 
 	<!-- main container -->
-    <div class="content">
+	<div class="content">
         
         <div class="container-fluid">
             <div id="pad-wrapper" class="form-page">
                 <div class="row-fluid form-wrapper">
                     <!-- left column -->
                     <div class="span8 column">
-                        <form  action="${pageContext.request.contextPath }/notice_update.action"
-                             method="post" novalidate="novalidate">
-                              <input type="hidden"  name="id"
-            value="<s:property value="model.id"/>" />
+                        <form>
                             <div class="field-box">
                                 <label>标题:</label>
-                                <input value="<s:property value="model.title"/>" name="title" id="iTitle" class="span8 inline-input" type="text" placeholder="请输入标题" maxlength="20" />
+                                <input value="<s:property value="model.title"/>" class="span8 inline-input" type="text" readonly="readonly" maxlength="20" />
                             </div>
-                    
 
                             <div class="field-box">
                                 <label>日期:</label>
-                                <input name="time" id="iTime" class="span8 inline-input" type="text" readonly="readonly" value="" />
+                                <input value="<s:property value="model.time"/>" class="span8 inline-input" type="text" readonly="readonly" />
                             </div>
 
                             <div class="field-box">
                                 <label>内容:</label>
-                                <textarea name="content" id="iTxt" class="span8" rows="20"><s:property value="model.content"/></textarea>
-                            </div>
-
-                            <div class="field-box text-center">
-                                <input type="submit" class="btn-flat primary" value="提交" />
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input type="button" class="btn-flat danger" value="重置" onclick="clearSth()"/>
+                                <textarea class="span8" readonly="readonly" rows="20" col="10"><s:property value="model.content"/></textarea>
                             </div>
 
                         </form>
-
                     </div>
-
+                    
                     </div>
                 </div>
             </div>
@@ -99,7 +92,7 @@
     <script src="js/jquery.uniform.min.js"></script>
     <script src="js/select2.min.js"></script>
     <script src="js/theme.js"></script>
-<script>
+<%-- <script>
     window.onload = function(){
         showTime();
     }
@@ -126,7 +119,7 @@
         document.getElementById("iTxt").value = "";
 
     }
-</script>
+</script> --%>
 
 </body>
 </html>

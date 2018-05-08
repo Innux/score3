@@ -11,7 +11,10 @@ import org.apache.struts2.ServletActionContext;
 
 import com.lut.service.AcademyService;
 import com.lut.service.ClazzService;
+import com.lut.service.DztService;
 import com.lut.service.MajorService;
+import com.lut.service.PrizeService;
+import com.lut.service.ScoreService;
 import com.lut.service.StudentService;
 import com.lut.utils.JsonUtils;
 import com.lut.utils.PageBean;
@@ -19,6 +22,9 @@ import com.lut.vo.Academy;
 import com.lut.vo.Clazz;
 import com.lut.vo.Major;
 import com.lut.vo.Student;
+import com.lut.vo.dztNprize.Dzt;
+import com.lut.vo.dztNprize.Prize;
+import com.lut.vo.scoreNcourse.Score;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -62,6 +68,22 @@ public class StudentAction extends ActionSupport implements ModelDriven<Student>
 	this.clazzService = clazzService;
     }
 
+    // 注入prize的service
+    private PrizeService prizeService;
+    // 注入score的service
+    private ScoreService scoreService;
+
+
+    public void setPrizeService(PrizeService prizeService) {
+	this.prizeService = prizeService;
+    }
+
+    public void setScoreService(ScoreService scoreService) {
+	this.scoreService = scoreService;
+    }
+
+
+
     // 接收专业id
     private Integer majorId;
 
@@ -90,12 +112,30 @@ public class StudentAction extends ActionSupport implements ModelDriven<Student>
 	if (user != null) {
 	    int type = user.getType();
 	    if (type == 1) {
+		int id = user.getId();
+		ServletActionContext.getRequest().getSession().setAttribute("user", user);
+		List<Prize> prizeList = prizeService.findByStuId(id);
+		ActionContext.getContext().getValueStack().set("prizeList", prizeList);
+		List<Object[]> scoreList = scoreService.findByStuId(id);
+		ActionContext.getContext().getValueStack().set("scoreList", scoreList);
 		return "loginSuccess_stu";
+
 	    } else if (type == 2) {
 		return "loginSuccess_admin";
 	    }
 	}
 	return "loginFailed";
+    }
+
+    public String stuIndex() {
+	Student user = (Student) ServletActionContext.getRequest().getSession().getAttribute("user");
+	int id = user.getId();
+	System.out.println("===================" + id);
+	List<Prize> prizeList = prizeService.findByStuId(id);
+	ActionContext.getContext().getValueStack().set("prizeList", prizeList);
+	List<Object[]> scoreList = scoreService.findByStuId(id);
+	ActionContext.getContext().getValueStack().set("scoreList", scoreList);
+	return "stuIndex";
     }
 
     // 跳转到添加学生的页面

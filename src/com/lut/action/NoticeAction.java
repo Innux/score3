@@ -37,6 +37,12 @@ public class NoticeAction extends ActionSupport implements ModelDriven<Notice> {
 	ActionContext.getContext().getValueStack().set("pageBean", pageBean);
 	return "findSuccess";
     }
+    //学生
+    public String findByPage2() {
+ 	PageBean<Notice> pageBean = noticeService.findByPage(page);
+ 	ActionContext.getContext().getValueStack().set("pageBean", pageBean);
+ 	return "findSuccess2";
+     }
     
     public String addPage() {
 	return "addPage";

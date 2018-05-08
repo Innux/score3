@@ -18,6 +18,7 @@
         <!-- 学生Action -->
         <action name="stu_*" class="studentAction" method="{1}">     
          	<result name="loginSuccess_stu">/WEB-INF/jsp/index2.jsp</result>
+         	<result name="stuIndex">/WEB-INF/jsp/index2.jsp</result>
             <result name="loginSuccess_admin">/WEB-INF/jsp/index.jsp</result>  
             <result name="loginFailed">/</result>      
             <result name="findAll">/WEB-INF/jsp/userList.jsp</result>
@@ -62,13 +63,15 @@
         </action>
           <!-- 公告 -->
           <action name="notice_*" class="noticeAction" method="{1}">
-         	<result name="findSuccess">/WEB-INF/jsp/znotice.jsp</result>  
+         	<result name="findSuccess">/WEB-INF/jsp/znotice.jsp</result> 
+         	<result name="findSuccess2">/WEB-INF/jsp/znotice2.jsp</result> 
+         	 
          	<result name="addPage">/WEB-INF/jsp/zAddNotice.jsp</result>  
          	<result name="deleteSuccess" type="redirectAction">notice_findByPage.action?page=1</result>
          	<result name="editSuccess">/WEB-INF/jsp/zEditNotice.jsp</result>
             <result name="updateSuccess" type="redirectAction">notice_findByPage.action?page=1</result>
             <result name="saveSuccess" type="redirectAction">notice_findByPage.action?page=1</result> 
-            <result name="showSuccess">/WEB-INF/jsp/zcontent.jsp</result>   	
+            <result name="showSuccess">/WEB-INF/jsp/zShowContent.jsp</result>   	
         </action>
 		
 	</package>

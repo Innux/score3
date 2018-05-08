@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="/struts-tags" prefix="s"%> 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Detail Admin - Home</title>
+	<title>Detail Admin - User Profile</title>
     
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
@@ -13,22 +14,18 @@
     <link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap-overrides.css" type="text/css" rel="stylesheet" />
 
     <!-- libraries -->
-    <link href="${pageContext.request.contextPath}/css/lib/jquery-ui-1.10.2.custom.css" rel="stylesheet" type="text/css" />
     <link href="${pageContext.request.contextPath}/css/lib/font-awesome.css" type="text/css" rel="stylesheet" />
 
     <!-- global styles -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/layout.css" />
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/elements.css" />
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/icons.css" />
-
+    
     <!-- this page specific styles -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/compiled/user-profile.css" type="text/css" media="screen" />
 
     <!-- open sans font -->
     <link href='http://fonts.useso.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' />
-
-    <!-- lato font -->
-    <link href='http://fonts.useso.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css' />
 
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -36,113 +33,137 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 <body>
 
-    <!-- navbar -->
+      <!-- navbar -->
    <%@ include file="navbar.jsp" %>
     <!-- sidebar -->
    <%@ include file="slidebar2.jsp" %>
- 
 
-    <!-- main container -->
+	<!-- main container -->
     <div class="content">
-
+        
         <div class="container-fluid">
             <div id="pad-wrapper" class="user-profile">
                 <!-- header -->
                 <div class="row-fluid header">
                     <div class="span8">
-                        <img src="img/contact-profile.png" class="avatar img-circle" />
-                        <h3 class="name">张三</h3>
-                        <span class="area">软件工程(2)</span>
+                        <img src="${pageContext.request.contextPath}/img/head.png" class="avatar img-circle" style="height: 100px; width: 100px"/>
+                        <h3 class="name"><s:property value="#session.user.name"/></h3>
+                        <span class="clazz"><s:property value="#session.user.clazz.class_name"/></span>
                     </div>
 
-                    <a class="btn-flat icon large pull-right edit" href="#">
-                        编辑信息
-                    </a>
+                  <!--    <a class="btn-flat icon large  edit">
+                        编辑
+                    </a> -->
                 </div>
 
                 <div class="row-fluid profile">
                     <!-- bio, new note & orders column -->
                     <div class="span9 bio">
                         <div class="profile-box">
-                            <!-- 个人简介 -->
-                            <div class="span12 section">
-                            <!--<div class="span12 personal-info">-->
-                                <h6>基本信息</h6>
-                                <ul>
-                                    <li>学号:<span>1416270237</span></li>
-                                    <li>性别:<span>男</span></li>
-                                    <li>年龄:<span>22</span></li>
-                                    <li>学院:<span>计算机与通信学院</span></li>
-                                    <li>专业:<span>软件工程</span></li>
 
-                                </ul>
-                                <h6>获奖情况</h6>
-                                <ul>
-                                    <li>2015 院三好</li>
-                                    <li>2015 校三号</li>
-                                    <li>2014 校级奖学金</li>
-                                </ul>
+
+                                <div class="container-fluid">
+                                    <div class="settings-wrapper">
+                                        <!-- edit form column -->
+                                        <h3>基本信息</h3>
+                                        <div class="span9  personal-info">
+                                            <br>
+                                                <div class="field-box">
+                                                    学号:&nbsp;&nbsp;&nbsp;
+                                                    <input class="span5 inline-input" type="text" 
+                                                    value="<s:property value="#session.user.number"/>" />
+                                                </div>
+                                                <div class="field-box">
+                                                    性别:&nbsp;&nbsp;&nbsp;
+                                                    <input class="span5 inline-input" type="text" 
+value="<s:if test='#session.user.sex == 1'>男</s:if><s:else>女</s:else>"/>
+                                                </div>
+                                                <div class="field-box">
+                                                    年龄:&nbsp;&nbsp;&nbsp;
+                                                    <input class="span5 inline-input" type="text" 
+                                                    value="<s:property value="#session.user.age"/>" />
+                                                </div>
+                                                <div class="field-box">
+                                                    学院:&nbsp;&nbsp;&nbsp;
+                                                    <input class="span5 inline-input" type="text" 
+                                                    value="<s:property value="#session.user.academy.a_name"/>" />
+                                                </div>
+                                                <div class="field-box">
+                                                    专业:&nbsp;&nbsp;&nbsp;
+                                                    <input class="span5 inline-input" type="text" 
+                                                    value="<s:property value="#session.user.major.m_name"/>" />
+                                                </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                            <br>
+                            <div class="container-fluid">
+                                <div class="settings-wrapper">
+                                    <h3>获奖情况</h3>
+                                    <br>
+                                    <ul>
+	                                  <s:iterator value="prizeList" var="prize">															
+											<li style="padding: 2px">
+												<s:property value="#prize.rule.year"/>
+												&nbsp;
+												<s:property value="#prize.rule.level"/>
+											</li>
+									</s:iterator> 
+                                    </ul>
+                                </div>
                             </div>
-
-                            <h6>成绩总览</h6>
-                            <br />
-                            <!-- recent orders table -->
+                            <br><br>
+                            <h3>成绩总览</h3>
+                            <br>
+                            <!-- 成绩列表 -->
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
+                                  	<th class="span2">
+                                        学年
+                                    </th>
                                     <th class="span2">
                                         学期
                                     </th>
                                     <th class="span3">
                                         <span class="line"></span>
-                                        平均成绩
-                                    </th>
-                                    <th class="span3">
-                                        <span class="line"></span>
-                                        总学分
+                                        学科平均成绩
                                     </th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <!-- row -->
-                                <tr class="first">
-                                    <td>
-                                       2014上半学期
-                                    </td>
-                                    <td>
-                                        88.4
-                                    </td>
-                                    <td>
-                                        23
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        2014下半学期
-                                    </td>
-                                    <td>
-                                        88.4
-                                    </td>
-                                    <td>
-                                        23
-                                    </td>
-                                </tr>
+	                                 <s:iterator value="scoreList" var="sco">	
+	                                  	<tr>
+		                                    <td><s:property value="#sco[0]"/></td>
+		                                    <td>
+											<s:if test="#sco[1] == 1">上学期</s:if><s:else>下学期</s:else>
+											</td>		                                    
+		                                    <td><s:property value="#sco[2]"/></td>
+	                                	</tr>																								
+									</s:iterator>
+                            
 
                                 </tbody>
                             </table>
+
                         </div>
                     </div>
 
-                    <div class="span3 address pull-right">
-                    </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- end main container -->
+
+
+	<!-- scripts -->
     <script src="js/jquery-latest.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/theme.js"></script>
 
 </body>
 </html>
+   

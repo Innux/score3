@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.lut.utils.PageHibernateCallback;
@@ -13,6 +15,24 @@ import com.lut.vo.Student;
 import com.lut.vo.scoreNcourse.Score;
 
 public class ScoreDao extends HibernateDaoSupport {
+
+    /*
+     * Session session =
+     * this.getHibernateTemplate().getSessionFactory().openSession(); String hql
+     * = "from Dzt d where 1=1 and d.year=? order by d.avg desc"; Query query =
+     * session.createQuery(hql);
+     * 
+     * List user = query.list();
+     */
+
+    public List<Object[]> findByStuId(int id) {
+	String hql = "select s.s_year,s.s_half,AVG(s.s_score) from Score s where s.student.id=? GROUP BY s.s_year,s.s_half order by s.s_year desc,s.s_half";
+	List<Object[]> list = this.getHibernateTemplate().find(hql, id);
+	if (list != null && list.size() > 0) {
+	    return list;
+	}
+	return null;
+    }
 
     public int findCount() {
 	String hql = "select count(*) from Score";
@@ -58,7 +78,6 @@ public class ScoreDao extends HibernateDaoSupport {
 	    countHql.append(" and s_half=" + sHalf);
 	}
 
-	
 	if (searchModel.getStudent() != null) {
 	    Integer sMajor = searchModel.getStudent().getMajor().getM_id();
 	    if (sMajor != null && !sMajor.equals("")) {
@@ -67,14 +86,14 @@ public class ScoreDao extends HibernateDaoSupport {
 	    }
 	}
 
-//	Clazz cla = searchModel.getStudent().getClazz();
-//	if (cla != null) {
-//	    Integer sClass = searchModel.getStudent().getClazz().getClass_id();
-//	    if (sClass != null && !sClass.equals("")) {
-//		hql.append(" and s.student.clazz.class_id=" + sClass);
-//		countHql.append(" and s.student.clazz.class_id=" + sClass);
-//	    }
-//	}
+	// Clazz cla = searchModel.getStudent().getClazz();
+	// if (cla != null) {
+	// Integer sClass = searchModel.getStudent().getClazz().getClass_id();
+	// if (sClass != null && !sClass.equals("")) {
+	// hql.append(" and s.student.clazz.class_id=" + sClass);
+	// countHql.append(" and s.student.clazz.class_id=" + sClass);
+	// }
+	// }
 
 	List<Long> countList = null;
 

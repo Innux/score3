@@ -83,4 +83,9 @@ public class ScoreService {
 	return pageBean;
     }
 
+    public List<Object[]> findByStuId(int id) {
+	List<Object[]> list = scoreDao.findByStuId(id);
+	return list;
+    }
+
 }

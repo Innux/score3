@@ -77,6 +77,8 @@
 		<property name="academyService" ref="academyService"></property>
 		<property name="majorService" ref="majorService"></property>
 		<property name="clazzService" ref="clazzService"></property>
+		<property name="scoreService" ref="scoreService"></property>
+		<property name="prizeService" ref="prizeService"></property>
 	</bean>
 	<!-- 学院action（一级分类） -->
 	<bean id="academyAction" class="com.lut.action.AcademyAction" scope="prototype">

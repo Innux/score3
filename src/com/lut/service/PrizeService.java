@@ -61,7 +61,7 @@ public class PrizeService {
 	    Rule rule = ruleDao.findLimit(year, level);
 	    List<Dzt> dztList = dztDao.findByLimit(start, end, year);
 	    for (int j = 0; j < dztList.size(); j++) {
-		System.out.println(dztList.get(j).getStudent().getName()+"=================================="+rule.getLevel());
+//		System.out.println(dztList.get(j).getStudent().getName()+"=================================="+rule.getLevel());
 		Prize prize = new Prize();
 		prize.setStudent(dztList.get(j).getStudent());
 		prize.setRule(rule);
@@ -100,6 +100,11 @@ public class PrizeService {
     // 清空表内容
     public void clearTable() {
 	prizeDao.clearTable();
+    }
+
+    public List<Prize> findByStuId(int id) {
+	List<Prize> prizeList = prizeDao.findByStuId(id);
+	return prizeList;
     }
 
 }

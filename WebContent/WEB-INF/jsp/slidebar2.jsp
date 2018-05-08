@@ -9,10 +9,9 @@
                     <span>个人中心</span>
                     <i class="icon-chevron-down"></i>
                 </a>
-                <ul class="submenu active">
-                    <li><a href="#">个人信息</a></li>
-                    <li><a href="#">成绩查询</a></li>
-                    <li><a href="#">获奖情况</a></li>
+                <ul class="submenu ">
+                    <li><a href="${pageContext.request.contextPath }/stu_stuIndex.action">个人信息</a></li>
+                    <li><a href="${pageContext.request.contextPath }/stu_findScoreByStuId.action">成绩查询</a></li>
                 </ul>
             </li>
             
@@ -23,8 +22,8 @@
                     <i class="icon-chevron-down"></i>
                 </a>
                 <ul class="submenu">
-                   <li><a href="#">留言板</a></li>
-                   <li><a href="#">公告栏</a></li>
+                <li><a href="${pageContext.request.contextPath }/notice_findByPage2.action?page=1">公告栏</a></li>
+                   <li><a href="#">留言板</a></li>    
                 </ul>
             </li>
         </ul>
