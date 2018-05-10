@@ -210,7 +210,7 @@
                  	var ids=data[n].m_id;  
                     var names=data[n].m_name;  
                     $("#majorId").append("<option value='"+ids+"'>"+names+"</option>");  
-                    }  
+                }  
             }  
         })  
     } 

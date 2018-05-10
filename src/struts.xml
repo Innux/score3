@@ -57,12 +57,12 @@
             <result name="addSuccess">/WEB-INF/jsp/addRule.jsp</result>
         </action>
         <!-- 获奖列表 -->
-          <action name="prize_*" class="prizeAction" method="{1}">
+        <action name="prize_*" class="prizeAction" method="{1}">
          	<result name="refreshSuccess">/WEB-INF/jsp/prizeList.jsp</result>
          	<result name="findSuccess">/WEB-INF/jsp/prizeList.jsp</result>     	
         </action>
           <!-- 公告 -->
-          <action name="notice_*" class="noticeAction" method="{1}">
+        <action name="notice_*" class="noticeAction" method="{1}">
          	<result name="findSuccess">/WEB-INF/jsp/znotice.jsp</result> 
          	<result name="findSuccess2">/WEB-INF/jsp/znotice2.jsp</result> 
          	 
@@ -72,6 +72,14 @@
             <result name="updateSuccess" type="redirectAction">notice_findByPage.action?page=1</result>
             <result name="saveSuccess" type="redirectAction">notice_findByPage.action?page=1</result> 
             <result name="showSuccess">/WEB-INF/jsp/zShowContent.jsp</result>   	
+        </action>
+        <!--留言  -->
+        <action name="ly_*" class="liuyanAction" method="{1}">
+         	<result name="findAll">/WEB-INF/jsp/xReply.jsp</result>
+         	<result name="saveSuccess" type="redirectAction">ly_findByPage.action?page=1</result>         	    	
+        </action>
+         <action name="re_*" class="replyAction" method="{1}">
+         	 <result name="saveSuccess" type="redirectAction">ly_findByPage.action?page=1</result>     	    	
         </action>
 		
 	</package>

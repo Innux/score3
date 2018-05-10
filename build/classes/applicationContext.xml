@@ -51,6 +51,8 @@
 				<value>com/lut/vo/dztNprize/Rule.hbm.xml</value>
 				<value>com/lut/vo/dztNprize/Prize.hbm.xml</value>
 				<value>com/lut/vo/Notice.hbm.xml</value>
+				<value>com/lut/vo/liuyan/Liuyan.hbm.xml</value>
+				<value>com/lut/vo/liuyan/Reply.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -108,6 +110,14 @@
 	<bean id="noticeAction" class="com.lut.action.NoticeAction" scope="prototype">
 		<property name="noticeService" ref="noticeService"></property>
 	</bean>
+	<!-- 留言板 -->
+	<bean id="liuyanAction" class="com.lut.action.LiuyanAction" scope="prototype">
+		<property name="liuyanService" ref="liuyanService"></property>
+		<property name="replyService" ref="replyService"></property>
+	</bean>
+	<bean id="replyAction" class="com.lut.action.ReplyAction" scope="prototype">
+		<property name="replyService" ref="replyService"></property>
+	</bean>
 	
 
 
@@ -154,6 +164,13 @@
 	<bean id="noticeService" class="com.lut.service.NoticeService">
 		<property name="noticeDao" ref="noticeDao" />
 	</bean>
+	<!-- 留言板 -->
+	<bean id="liuyanService" class="com.lut.service.LiuyanService">
+		<property name="liuyanDao" ref="liuyanDao" />
+	</bean>
+	<bean id="replyService" class="com.lut.service.ReplyService">
+		<property name="replyDao" ref="replyDao" />
+	</bean>
 	
 	
 
@@ -190,6 +207,13 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<bean id="noticeDao" class="com.lut.dao.NoticeDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 留言板 -->
+	<bean id="liuyanDao" class="com.lut.dao.LiuyanDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="replyDao" class="com.lut.dao.ReplyDao">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 

@@ -75,7 +75,7 @@
                                     <div class="span10 field-box">
                                         <label>学号:</label>
                                         <input name="stuNumber" class="span7" type="text" />
-                                        <span>张三</span>
+                                        <%-- <span>张三</span> --%>
                                     </div>
                                     <div class="span10 field-box">
                                         <label>分数:</label>

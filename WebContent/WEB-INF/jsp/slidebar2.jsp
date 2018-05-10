@@ -22,8 +22,8 @@
                     <i class="icon-chevron-down"></i>
                 </a>
                 <ul class="submenu">
-                <li><a href="${pageContext.request.contextPath }/notice_findByPage2.action?page=1">公告栏</a></li>
-                   <li><a href="#">留言板</a></li>    
+                   <li><a href="${pageContext.request.contextPath }/notice_findByPage2.action?page=1">公告栏</a></li>
+                   <li><a href="${pageContext.request.contextPath }/ly_findByPage.action?page=1">留言板</a></li>    
                 </ul>
             </li>
         </ul>

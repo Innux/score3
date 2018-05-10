@@ -148,7 +148,6 @@ public class StudentAction extends ActionSupport implements ModelDriven<Student>
     // ajax 根据选择的学院id查询专业
     public String findMajorByAcademyId() throws IOException {
 	String aid = request.getParameter("aid").trim();
-	System.out.println("============" + aid);
 	List<Major> majorList = majorService.findByAcademyId(Integer.parseInt(aid));
 	response.setContentType("text/html;charset=UTF-8");
 	String result = JsonUtils.toJson(majorList);
@@ -159,7 +158,6 @@ public class StudentAction extends ActionSupport implements ModelDriven<Student>
 	out.print(result);
 	out.flush();
 	out.close();
-
 	return NONE;
     }
 
@@ -176,7 +174,6 @@ public class StudentAction extends ActionSupport implements ModelDriven<Student>
 	out.print(result);
 	out.flush();
 	out.close();
-
 	return NONE;
     }
 
