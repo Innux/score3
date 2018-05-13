@@ -59,12 +59,12 @@
                              method="post" novalidate="novalidate" >
 						<div class="ui-select span1">
 							<select name="pYear" >
-								<s:if test="!searchModel.rule.year">
-									<option value="">学年</option>
-								</s:if>
-								<s:else>
+								<s:if test="searchModel.rule.year != null">
 									<option value="<s:property value="searchModel.rule.year"/>"><s:property value="searchModel.rule.year"/></option>
 									<option value="">全部</option>
+								</s:if>
+								<s:else>
+									<option value="">学年</option>
 								</s:else>	
 								<option value="2014">2014</option>
 								<option value="2015">2015</option>

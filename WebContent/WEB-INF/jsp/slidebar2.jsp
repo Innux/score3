@@ -11,7 +11,7 @@
                 </a>
                 <ul class="submenu ">
                     <li><a href="${pageContext.request.contextPath }/stu_stuIndex.action">个人信息</a></li>
-                    <li><a href="${pageContext.request.contextPath }/score_stuFindBySearchModel.action">成绩查询</a></li>
+                    <li><a href="${pageContext.request.contextPath }/score_stuFindBySearchModel.action?page=1">成绩查询</a></li>
                 </ul>
             </li>
             

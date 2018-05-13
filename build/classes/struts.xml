@@ -40,6 +40,7 @@
             <result name="findAll">/WEB-INF/jsp/scoreList.jsp</result>   
             <result name="deleteSuccess" type="redirectAction">score_findAll.action?page=1</result>
             <result name="findBySearchModel">/WEB-INF/jsp/scoreList.jsp</result> 
+            <result name="stuFindBySearchModel">/WEB-INF/jsp/scoreListStu.jsp</result> 
             <result name="importExcel" type="redirectAction">score_findAll.action?page=1</result>
         </action>
         <!--德智体action  -->

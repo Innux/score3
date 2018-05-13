@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="/struts-tags" prefix="s"%>
     <div class="navbar navbar-inverse">
         <div class="navbar-inner">
             <button type="button" class="btn btn-navbar visible-phone" id="menu-toggler">
@@ -57,18 +58,10 @@
                             <div class="messages">
                                 <a href="#" class="item">
                                     <img src="img/contact-img.png" class="display" />
-                                    <div class="name">Alejandra Galván</div>
-                                    <div class="msg">
-                                        There are many variations of available, but the majority have suffered alterations.
-                                    </div>
                                     <span class="time"><i class="icon-time"></i> 13 min.</span>
                                 </a>
                                 <a href="#" class="item">
                                     <img src="img/contact-img2.png" class="display" />
-                                    <div class="name">Alejandra Galván</div>
-                                    <div class="msg">
-                                        There are many variations of available, have suffered alterations.
-                                    </div>
                                     <span class="time"><i class="icon-time"></i> 26 min.</span>
                                 </a>
                                 <div class="footer">
@@ -80,13 +73,12 @@
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle hidden-phone" data-toggle="dropdown">
-                        你的账户
+                        <s:property value="#session.user.loginName"/>
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="#">个人信息</a></li>
                         <li><a href="#">修改密码</a></li>
-                        <li><a href="#">导出数据</a></li>
                         <li><a href="#">发送反馈</a></li>
                     </ul>
                 </li>

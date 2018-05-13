@@ -64,13 +64,15 @@
 							<select name="sYear" >
 								<s:if test="searchModel.s_year != null">
 									<option value="<s:property value="searchModel.s_year"/>"><s:property value="searchModel.s_year"/></option>
+									<option value="">全部</option>
 								</s:if>
 								<s:else>
 									<option value="">学年</option>
 								</s:else>
-								<!-- <option value="2014">2014</option> -->
+								<option value="2014">2014</option>
 								<option value="2015">2015</option>
 								<option value="2016">2016</option>
+								<option value="2017">2017</option>
 							</select>
 						</div>
 						<div class="ui-select span1">
@@ -84,6 +86,7 @@
 										下学期
 										</s:else>
 									</option>
+									<option value="">全部</option>
 								</s:if>
 								<s:else>
 									<option value="">学期</option>
@@ -95,20 +98,21 @@
 						</div>
 						<div class="ui-select span1">
 							<select name="sMajor">
-								<s:if test="searchModel.student == null">
-									<option value="">专业</option>
-								</s:if>
-								<s:else>
+								<s:if test="searchModel.student ！= null">
 									<option value="<s:property value="searchModel.student.major.m_id"/>">
 										<s:property value="searchModel.student.major.m_name"/>
-									</option>
+										<option value="">全部</option>
+									</option>	
+								</s:if>
+								<s:else>
+									<option value="">专业</option>
 								</s:else>
-								
-								 <s:iterator value="majorList" var="maj">
-									<option value="<s:property value="#maj.m_id"/>">
-										<s:property value="#maj.m_name"/>
-									</option>
+								<s:iterator value="majorList" var="maj">
+										<option value="<s:property value="#maj.m_id"/>">
+											<s:property value="#maj.m_name"/>
+										</option>
 								</s:iterator> 
+								 
 							</select>
 						</div>
 					<%-- 	<div class="ui-select span1">

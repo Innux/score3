@@ -132,7 +132,7 @@ public class ScoreAction extends ActionSupport implements ModelDriven<Score> {
 	
 	String stuHalf = request.getParameter("stuHalf");
 	if (stuHalf != null && !"".equals(stuHalf.trim())) {
-	    searchModel.setS_half(stuHalf.equals("上学期")?1:2);
+	    searchModel.setS_half(Integer.parseInt(stuHalf));
 	}
 
 	PageBean<Score> pageBean = scoreService.stuFindByPage(user.getId(),searchModel, page);

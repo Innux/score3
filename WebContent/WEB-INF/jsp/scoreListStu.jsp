@@ -54,32 +54,35 @@
 					<h3>成绩列表</h3>
 					
 					<div class="span10 pull-right">
-					<form action="${pageContext.request.contextPath }/score_findBySearchModel.action?page=1"
+					<form action="${pageContext.request.contextPath }/score_stuFindBySearchModel.action?page=1"
                              method="post" novalidate="novalidate">
 						<div class="ui-select span1">
-							<select name="sYear" >
+							<select name="stuYear" >
 								<s:if test="searchModel.s_year != null">
 									<option value="<s:property value="searchModel.s_year"/>"><s:property value="searchModel.s_year"/></option>
+									<option value="">全部</option>
 								</s:if>
 								<s:else>
 									<option value="">学年</option>
-								</s:else>
+								</s:else>		
 								<option value="2014">2014</option>
 								<option value="2015">2015</option>
 								<option value="2016">2016</option>
+								<option value="2017">2017</option>
 							</select>
 						</div>
 						<div class="ui-select span1">
-							<select name="sHalf">
+							<select name="stuHalf">
 								<s:if test="searchModel.s_half != null">
 									<option value="<s:property value="searchModel.s_half"/>">
-										<s:if test="searchModel.s_half == 1">
+										<s:if test="searchModel.s_half==1">
 										上学期
 										</s:if>
 										<s:else>
 										下学期
-										</s:else>
+										</s:else> 
 									</option>
+									<option value="">全部</option>
 								</s:if>
 								<s:else>
 									<option value="">学期</option>
@@ -188,17 +191,6 @@
 	<script src="js/jquery-latest.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/theme.js"></script>
-	
-	<script>
-		//导入
-		function doImportExcel(){
-		    document.forms[0].action = "${ pageContext.request.contextPath }/score_importExcel.action";
-		    document.forms[0].submit();
-		}
-		function doExportExcel(){
-		    window.open("${ pageContext.request.contextPath }/score_exportExcel.action");
-		}
-	</script>
 
 </body>
 </html>
