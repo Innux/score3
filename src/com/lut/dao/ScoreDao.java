@@ -86,15 +86,6 @@ public class ScoreDao extends HibernateDaoSupport {
 	    }
 	}
 
-	// Clazz cla = searchModel.getStudent().getClazz();
-	// if (cla != null) {
-	// Integer sClass = searchModel.getStudent().getClazz().getClass_id();
-	// if (sClass != null && !sClass.equals("")) {
-	// hql.append(" and s.student.clazz.class_id=" + sClass);
-	// countHql.append(" and s.student.clazz.class_id=" + sClass);
-	// }
-	// }
-
 	List<Long> countList = null;
 
 	countList = this.getHibernateTemplate().find(countHql.toString());
@@ -109,7 +100,37 @@ public class ScoreDao extends HibernateDaoSupport {
 	map.put("scoreList", scoreList);
 	return map;
     }
+    
+    public Map<String, List<?>> stuFindByPage(Integer stuId, Score searchModel, int begin, int limit) {
+	StringBuffer hql = new StringBuffer("from Score s where s.student.id="+stuId);
+	StringBuffer countHql = new StringBuffer("select count(*) from Score s where s.student.id="+stuId);
 
+	String sYear = searchModel.getS_year();
+	if (sYear != null && !sYear.equals("")) {
+	    hql.append(" and s_year=" + sYear);
+	    countHql.append(" and s_year=" + sYear);
+	}
+
+	Integer sHalf = searchModel.getS_half();
+	if (sHalf != null && !sHalf.equals("")) {
+	    hql.append("  and s_half=" + sHalf);
+	    countHql.append(" and s_half=" + sHalf);
+	}
+
+	List<Long> countList = null;
+
+	countList = this.getHibernateTemplate().find(countHql.toString());
+
+	List<Score> scoreList = null;
+	scoreList = this.getHibernateTemplate()
+		.execute(new PageHibernateCallback<Score>(hql.toString(), new Object[] {}, begin, limit));
+
+	Map<String, List<?>> map = new HashMap<>();
+	map.put("countList", countList);
+	map.put("scoreList", scoreList);
+	return map;
+      }
+    
     public Score findByScoreId(Integer s_id) {
 	return this.getHibernateTemplate().get(Score.class, s_id);
     }
@@ -117,5 +138,20 @@ public class ScoreDao extends HibernateDaoSupport {
     public void delete(Score score) {
 	this.getHibernateTemplate().delete(score);
     }
+
+    public List<Score> findAll() {
+	String hql = "from Score";
+	List<Score> list = this.getHibernateTemplate().find(hql);
+	if (list != null && list.size() > 0) {
+	    return list;
+	}
+	return null;
+    }
+
+    public void save(Score score) {
+	this.getHibernateTemplate().save(score);
+    }
+
+  
 
 }

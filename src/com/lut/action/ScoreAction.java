@@ -1,7 +1,11 @@
 package com.lut.action;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,9 +15,9 @@ import com.lut.service.ClazzService;
 import com.lut.service.MajorService;
 import com.lut.service.ScoreService;
 import com.lut.utils.PageBean;
-import com.lut.vo.Clazz;
 import com.lut.vo.Major;
 import com.lut.vo.Student;
+import com.lut.vo.dztNprize.Dzt;
 import com.lut.vo.scoreNcourse.Score;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -83,7 +87,6 @@ public class ScoreAction extends ActionSupport implements ModelDriven<Score> {
 	Score searchModel = new Score();
 	Student stu = null;
 	Major maj = null;
-	// Clazz cla = new Clazz();
 
 	String sYear = request.getParameter("sYear");
 	if (sYear != null && !"".equals(sYear.trim())) {
@@ -108,26 +111,99 @@ public class ScoreAction extends ActionSupport implements ModelDriven<Score> {
 	    searchModel.setStudent(stu);
 	}
 
-	// Integer sClazz = null;
-	// String sClazzStr = request.getParameter("sClazz");
-	// if (sClazzStr != null && !"".equals(sClazzStr.trim())) {
-	// sClazz = Integer.parseInt(sClazzStr);
-	// cla.setClass_id(sClazz);
-	// stu.setClazz(cla);
-	// searchModel.setStudent(stu);
-	// }
-
 	PageBean<Score> pageBean = scoreService.findByPage(searchModel, page);
 	ActionContext.getContext().getValueStack().set("pageBean", pageBean);
 	ActionContext.getContext().getValueStack().set("searchModel", searchModel);
 
 	List<Major> majorList = majorService.findAll();
 	ActionContext.getContext().getValueStack().set("majorList", majorList);
-	// List<Clazz> clazzList = clazzService.findAll();
-	// ActionContext.getContext().getValueStack().set("clazzList",
-	// clazzList);
 
 	return "findBySearchModel";
+    }
+
+    public String stuFindBySearchModel() {
+	Student user = (Student) ServletActionContext.getRequest().getSession().getAttribute("user");
+	Score searchModel = new Score();
+
+	String stuYear = request.getParameter("stuYear");
+	if (stuYear != null && !"".equals(stuYear.trim())) {
+	    searchModel.setS_year(stuYear);
+	}
+	
+	String stuHalf = request.getParameter("stuHalf");
+	if (stuHalf != null && !"".equals(stuHalf.trim())) {
+	    searchModel.setS_half(stuHalf.equals("上学期")?1:2);
+	}
+
+	PageBean<Score> pageBean = scoreService.stuFindByPage(user.getId(),searchModel, page);
+	ActionContext.getContext().getValueStack().set("pageBean", pageBean);
+	ActionContext.getContext().getValueStack().set("searchModel", searchModel);
+
+	return "stuFindBySearchModel";
+    }
+
+    public void exportExcel() {
+	try {
+	    // 1、查找列表
+	    List<Score> scoreList = scoreService.findAll();
+	    // 2、导出
+	    HttpServletRequest request = ServletActionContext.getRequest();
+	    HttpServletResponse response = ServletActionContext.getResponse();
+	    Date d = new Date();
+	    SimpleDateFormat sdf = new SimpleDateFormat("MMdd_HHmm");
+
+	    response.setContentType("application/octet-stream");
+	    response.setHeader("Content-Disposition",
+		    "attachment;filename=" + new String(("score_" + sdf.format(d) + ".xls").getBytes(), "utf-8"));
+	    ServletOutputStream outputStream = response.getOutputStream();
+	    scoreService.exportExcel(scoreList, outputStream);
+	    if (outputStream != null) {
+		outputStream.close();
+	    }
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
+    }
+
+    private File scoreExcel;
+    private String scoreExcelContentType;
+    private String scoreExcelFileName;
+
+    public File getScoreExcel() {
+	return scoreExcel;
+    }
+
+    public void setScoreExcel(File scoreExcel) {
+	this.scoreExcel = scoreExcel;
+    }
+
+    public String getScoreExcelContentType() {
+	return scoreExcelContentType;
+    }
+
+    public void setScoreExcelContentType(String scoreExcelContentType) {
+	this.scoreExcelContentType = scoreExcelContentType;
+    }
+
+    public String getScoreExcelFileName() {
+	return scoreExcelFileName;
+    }
+
+    public void setScoreExcelFileName(String scoreExcelFileName) {
+	this.scoreExcelFileName = scoreExcelFileName;
+    }
+
+    // 导入用户列表
+    public String importExcel() {
+	// 1、获取文件，并判断是否为excel文件
+	if (scoreExcel != null && scoreExcelFileName.matches("^.+\\.(?i)((xls)|(xlsx))$")) {
+	    // 2、导入
+	    System.out.println("==================导入");
+	    scoreService.importExcel(scoreExcel, scoreExcelFileName);
+	} else {
+	    System.out.println(":::null::::");
+	}
+	return "importExcel";
     }
 
 }

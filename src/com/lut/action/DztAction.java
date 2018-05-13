@@ -87,8 +87,8 @@ public class DztAction extends ActionSupport implements ModelDriven<Dzt> {
     
     public String findBySearchModelOrder() {
    	Dzt searchModel = new Dzt();
-   	Student stu = null;
-   	Major maj = null;
+//   	Student stu = null;
+//   	Major maj = null;
 
    	String dYear = request.getParameter("dYear");
    	if (dYear != null && !"".equals(dYear.trim())) {

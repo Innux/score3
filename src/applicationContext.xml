@@ -136,6 +136,8 @@
 	<!-- 成绩 -->
 	<bean id="scoreService" class="com.lut.service.ScoreService">
 		<property name="scoreDao" ref="scoreDao" />
+		<property name="studentDao" ref="studentDao" />
+		<property name="courseDao" ref="courseDao" />
 	</bean>
 	<!-- 专业 -->
 	<bean id="majorService" class="com.lut.service.MajorService">
@@ -185,6 +187,9 @@
 	</bean>
 	<!-- 学院dao配置 -->
 	<bean id="academyDao" class="com.lut.dao.AcademyDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="courseDao" class="com.lut.dao.CourseDao">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<!-- 成绩 -->

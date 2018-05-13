@@ -100,7 +100,7 @@
 							<s:iterator var="dzt" value="pageBean.list" status="status">
 								<tr>
 									<td>
-										<s:property value="#status.index+1"/>
+										<s:property value="#status.index+1+(pageBean.page-1)*10"/>
 									</td>
 									<td>
 										<s:property value="#dzt.year"/>

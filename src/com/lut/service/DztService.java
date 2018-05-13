@@ -30,7 +30,7 @@ public class DztService {
 	// 设置当前页数:
 	pageBean.setPage(page);
 	// 设置每页显示记录数:
-	int limit = 5;
+	int limit = 10;
 	pageBean.setLimit(limit);
 	int begin = (page - 1) * limit;
 	int totalCount = 0;
@@ -56,7 +56,7 @@ public class DztService {
     public PageBean<Dzt> findByPageOrder(Dzt searchModel, Integer page) {
 	PageBean<Dzt> pageBean = new PageBean<Dzt>();
 	pageBean.setPage(page);
-	int limit = 5;
+	int limit = 10;
 	pageBean.setLimit(limit);
 	int begin = (page - 1) * limit;
 	int totalCount = 0;

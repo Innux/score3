@@ -51,7 +51,7 @@
             </a>
             <ul class="submenu">
             	<li><a href="${pageContext.request.contextPath }/notice_findByPage.action?page=1">公告</a></li>
-                <li><a href="#">留言板</a></li>            
+                <li><a href="${pageContext.request.contextPath }/ly_findByPageAdmin.action?page=1">留言板管理</a></li>            
             </ul>
         </li>
     </ul>

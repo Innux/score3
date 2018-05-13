@@ -53,19 +53,20 @@
 				<div class="row-fluid header">
 					<h3>成绩列表</h3>
 <!--============================从excel导入成绩  -->
-						<a href="${pageContext.request.contextPath }/#"
-							class="btn-flat success pull-right"> <span>&#43;</span> 导入成绩
-						</a>
+						<%-- <a href="${pageContext.request.contextPath }/#"
+							class="btn-flat success pull-right"> <span>&#43;</span> 导出成绩
+						</a> --%>
+					
 					<div class="span10 pull-right">
 					<form action="${pageContext.request.contextPath }/score_findBySearchModel.action?page=1"
                              method="post" novalidate="novalidate">
 						<div class="ui-select span1">
 							<select name="sYear" >
-								<s:if test="searchModel.s_year == ''">
-									<option value="">学年</option>
+								<s:if test="searchModel.s_year != null">
+									<option value="<s:property value="searchModel.s_year"/>"><s:property value="searchModel.s_year"/></option>
 								</s:if>
 								<s:else>
-									<option value="<s:property value="searchModel.s_year"/>"><s:property value="searchModel.s_year"/></option>
+									<option value="">学年</option>
 								</s:else>
 								<!-- <option value="2014">2014</option> -->
 								<option value="2015">2015</option>
@@ -86,8 +87,7 @@
 								</s:if>
 								<s:else>
 									<option value="">学期</option>
-								</s:else>
-								
+								</s:else>			
 								<option value="1">上学期</option>
 								<option value="2">下学期</option>
 								
@@ -123,7 +123,18 @@
 						</div> --%>
 						 <input type="submit" class="btn-flat primary" value="确认" />
 						</form>
+						
+						<input type="button" value="导出成绩" class="btn-flat success pull-right" onclick="doExportExcel()"/>
+					<form action="${pageContext.request.contextPath }/score_importExcel.action"
+                             method="post" novalidate="novalidate" enctype="multipart/form-data"
+                             class="pull-right"> 
+                            <input name="scoreExcel"  type="file"/>					
+						<input type="submit" class="btn-flat success " value="导入成绩" style="margin-right:20px;"/>
+						<!-- <input type="button" value="导入" class="btn-flat success pull-right" onclick="doImportExcel()"/> -->
+					</form> 
 					</div>
+					
+					
  
 				</div>
 
@@ -191,7 +202,7 @@
 					<!--  上一页-->
 					<li>
 						<s:if test="pageBean.page != 1">
-<a href="${ pageContext.request.contextPath }/score_findAll.action?page=<s:property value="pageBean.page-1"/>">&#8249;</a>
+<a href="${ pageContext.request.contextPath }/score_findBySearchModel.action?page=<s:property value="pageBean.page-1"/>">&#8249;</a>
 					</s:if>
 						<s:else>
 						<a href="#">&#8249;</a>
@@ -202,7 +213,7 @@
 						    <s:param name="first" value="1" />
 						    <s:param name="last" value="pageBean.totalPage" />
 						    <s:iterator>
-						        <li><a href="${ pageContext.request.contextPath }/score_findAll.action?page=<s:property/>"><s:property/></a></li>
+<li><a href="${ pageContext.request.contextPath }/score_findBySearchModel.action?page=<s:property/>&sYear=<s:property value="searchModel.s_year"/>&sMajor=<s:property value="searchModel.student.major.m_id"/>"><s:property/></a></li>
 						    </s:iterator>
 						</s:bean>
 					<!-- 选页end -->
@@ -211,10 +222,10 @@
 						<li>
 						<s:if test="pageBean.page != pageBean.totalPage">
 							<s:if test="searchModel == null">
-<a href="${ pageContext.request.contextPath }/score_findAll.action?page=<s:property value="pageBean.page+1"/>">&#8250;</a>
+<a href="${ pageContext.request.contextPath }/score_findBySearchModel.action?page=<s:property value="pageBean.page+1"/>&sYear=<s:property value="searchModel.s_year"/>&sMajor=<s:property value="searchModel.student.major.m_id"/>">&#8250;</a>
 							</s:if>
 							<s:else>
-<a href="${ pageContext.request.contextPath }/score_findBySearchModel.action?page=<s:property value="pageBean.page+1"/>">&#8250;</a>
+<a href="${ pageContext.request.contextPath }/score_findBySearchModel.action?page=<s:property value="pageBean.page+1"/>&sYear=<s:property value="searchModel.s_year"/>&sMajor=<s:property value="searchModel.student.major.m_id"/>">&#8250;</a>
 							</s:else>
 						</s:if>
 						<s:else>
@@ -235,6 +246,17 @@
 	<script src="js/jquery-latest.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/theme.js"></script>
+	
+	<script>
+		//导入
+		function doImportExcel(){
+		    document.forms[0].action = "${ pageContext.request.contextPath }/score_importExcel.action";
+		    document.forms[0].submit();
+		}
+		function doExportExcel(){
+		    window.open("${ pageContext.request.contextPath }/score_exportExcel.action");
+		}
+	</script>
 
 </body>
 </html>

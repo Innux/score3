@@ -97,7 +97,7 @@
                             	<s:property value="#ly.content"/>
                             </p>
                             <p class="story_time">
-                            	<s:property value="#ly.student.name"/>&nbsp;&nbsp;<s:property value="#ly.time"/>
+                            	<s:property value="#ly.student.loginName"/>&nbsp;&nbsp;<s:property value="#ly.time"/>
                             	<a href="#" onclick="showReply('<s:property value="#ly.id"/>')">回复</a>
                             </p>
                             <div id="<s:property value="#ly.id"/>" class="replay" style="display: none;">
@@ -122,6 +122,43 @@
 </s:iterator>                          
                     </div>
                 </div>
+<!--================= 分页======================== -->
+第<s:property value="pageBean.page"/>/<s:property value="pageBean.totalPage"/>页 
+				<!-- =============================== -->
+				<div class="pagination pull-right">
+					<ul>
+					<!--  上一页-->
+					<li>
+						<s:if test="pageBean.page != 1">
+<a href="${ pageContext.request.contextPath }/ly_findByPage.action?page=<s:property value="pageBean.page-1"/>">&#8249;</a>
+					</s:if>
+						<s:else>
+						<a href="#">&#8249;</a>
+						</s:else>
+					</li>
+					<!-- 选页 -->
+						<s:bean name="org.apache.struts2.util.Counter" id="counter">
+						    <s:param name="first" value="1" />
+						    <s:param name="last" value="pageBean.totalPage" />
+						    <s:iterator>
+						        <li><a href="${ pageContext.request.contextPath }/ly_findByPage.action?page=<s:property/>"><s:property/></a></li>
+						    </s:iterator>
+						</s:bean>
+					<!-- 选页end -->
+					<!-- 下一页 -->
+					
+						<li>
+						<s:if test="pageBean.page != pageBean.totalPage">
+<a href="${ pageContext.request.contextPath }/ly_findByPage.action?page=<s:property value="pageBean.page+1"/>">&#8250;</a>
+						</s:if>
+						<s:else>
+						<a href="#">&#8250;</a>
+						</s:else>
+						</li>
+					</ul>
+				</div>
+	<!--===================  -->
+
 
             </div>
         </div>
@@ -224,8 +261,8 @@
                      data : {},  
                      dataType : "JSON",  
                      success : function(data) {    	 
-                         for(var n=0;n<data.length;n++){  
-                          	var name=data[n].student.name;  
+                         for(var n=data.length-1;n>=0;n--){  
+                          	var name=data[n].student.loginName;  
                             var content=data[n].content;
                             var time=data[n].time;
                             var mydiv = document.getElementById(lyid)

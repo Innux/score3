@@ -40,12 +40,6 @@
     <!-- navbar -->
 	<%@ include file="navbar.jsp"%>
 	<!-- sidebar -->
-	<s:if test='#session.user.type == 1'>
-		<%@ include file="slidebar2.jsp"%>
-	</s:if>
-	<s:else>
-		<%@ include file="slidebar.jsp"%>
-	</s:else>
 	
 
 

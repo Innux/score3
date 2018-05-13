@@ -40,6 +40,7 @@
             <result name="findAll">/WEB-INF/jsp/scoreList.jsp</result>   
             <result name="deleteSuccess" type="redirectAction">score_findAll.action?page=1</result>
             <result name="findBySearchModel">/WEB-INF/jsp/scoreList.jsp</result> 
+            <result name="importExcel" type="redirectAction">score_findAll.action?page=1</result>
         </action>
         <!--德智体action  -->
         <action name="dzt_*" class="dztAction" method="{1}">
@@ -76,7 +77,9 @@
         <!--留言  -->
         <action name="ly_*" class="liuyanAction" method="{1}">
          	<result name="findAll">/WEB-INF/jsp/xReply.jsp</result>
-         	<result name="saveSuccess" type="redirectAction">ly_findByPage.action?page=1</result>         	    	
+         	<result name="findAllAdmin">/WEB-INF/jsp/xReplyAdmin.jsp</result>
+         	<result name="saveSuccess" type="redirectAction">ly_findByPage.action?page=1</result>  
+         	<result name="deleteSuccess" type="redirectAction">ly_findByPageAdmin.action?page=1</result>       	    	
         </action>
          <action name="re_*" class="replyAction" method="{1}">
          	 <result name="saveSuccess" type="redirectAction">ly_findByPage.action?page=1</result>     	    	
