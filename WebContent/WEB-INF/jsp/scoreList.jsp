@@ -133,9 +133,9 @@
                              method="post" novalidate="novalidate" enctype="multipart/form-data"
                              class="pull-right"> 
                             <input name="scoreExcel"  type="file"/>					
-						<input type="submit" class="btn-flat success " value="导入成绩" style="margin-right:20px;"/>
-						<!-- <input type="button" value="导入" class="btn-flat success pull-right" onclick="doImportExcel()"/> -->
+						<input type="submit" class="btn-flat success " value="导入成绩" style="margin-right:20px;"/>		
 					</form> 
+					<!-- <input type="button" value="导入" class="btn-flat success pull-right" onclick="doImportExcel()"/> -->
 					</div>
 					
 					

@@ -193,7 +193,7 @@ public class ScoreAction extends ActionSupport implements ModelDriven<Score> {
 	this.scoreExcelFileName = scoreExcelFileName;
     }
 
-    // 导入用户列表
+    // 导入
     public String importExcel() {
 	// 1、获取文件，并判断是否为excel文件
 	if (scoreExcel != null && scoreExcelFileName.matches("^.+\\.(?i)((xls)|(xlsx))$")) {

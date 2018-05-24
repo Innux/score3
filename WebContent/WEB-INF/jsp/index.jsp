@@ -85,20 +85,15 @@
                 editable: true,
                 events: [
                     {
-                        title: '海报展',
+                        title: '运动会',
                         start: new Date(y, m, 1)
                     },
                     {
-                        title: '中期答辩',
+                        title: '论文初审',
                         start: new Date(y, m, 25),
                         end: new Date(y, m, 26),
                     },
-                    {
-                        title: '运动会',
-                        start: new Date(y, m, 28),
-                        end: new Date(y, m, 29),
-                        url: 'http://google.com/'
-                    }
+                 
                 ],
                 eventBackgroundColor: '#278ccf'
             });

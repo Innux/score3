@@ -54,5 +54,15 @@
                 <li><a href="${pageContext.request.contextPath }/ly_findByPageAdmin.action?page=1">留言板管理</a></li>            
             </ul>
         </li>
+           <li>
+            <a class="dropdown-toggle" href="#">
+                <i class="icon-user"></i>
+                <span>教师管理</span>
+                <i class="icon-chevron-down"></i>
+            </a>
+            <ul class="submenu">
+                <li><a href="${pageContext.request.contextPath }/tch_showAvg.action">教师评分</a></li>
+            </ul>
+        </li>
     </ul>
 </div>

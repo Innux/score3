@@ -130,7 +130,6 @@ public class StudentAction extends ActionSupport implements ModelDriven<Student>
     public String stuIndex() {
 	Student user = (Student) ServletActionContext.getRequest().getSession().getAttribute("user");
 	int id = user.getId();
-	System.out.println("===================" + id);
 	List<Prize> prizeList = prizeService.findByStuId(id);
 	ActionContext.getContext().getValueStack().set("prizeList", prizeList);
 	List<Object[]> scoreList = scoreService.findByStuId(id);

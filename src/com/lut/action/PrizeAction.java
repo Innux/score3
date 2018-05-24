@@ -67,7 +67,6 @@ public class PrizeAction extends ActionSupport implements ModelDriven<Prize> {
 
     // 刷新按钮 1.清空原表数据 2.根据新规则插入数据 3.展现数据
     public String refresh() {
-
 	// 1.清空原表数据
 	prizeService.clearTable();
 	// 2.根据新规则插入数据
@@ -76,7 +75,6 @@ public class PrizeAction extends ActionSupport implements ModelDriven<Prize> {
 	Prize searchModel = new Prize();
 	PageBean<Prize> pageBean = prizeService.findBySearchModel(searchModel, page);
 	ActionContext.getContext().getValueStack().set("pageBean", pageBean);
-
 	return "refreshSuccess";
     }
 }

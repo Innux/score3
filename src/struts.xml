@@ -85,6 +85,12 @@
          <action name="re_*" class="replyAction" method="{1}">
          	 <result name="saveSuccess" type="redirectAction">ly_findByPage.action?page=1</result>     	    	
         </action>
+          <action name="tch_*" class="teacherAction" method="{1}">
+         	 <result name="saveSuccess" type="redirectAction">tch_tchIndex.action</result>
+         	 <result name="findAll">/WEB-INF/jsp/teacher.jsp</result>
+         	 <result name="findAllByStuId">/WEB-INF/jsp/teacherDone.jsp</result>   
+         	 <result name="showAvg">/WEB-INF/jsp/teacherAvg.jsp</result>    	    	
+        </action>
 		
 	</package>
 </struts>

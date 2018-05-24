@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    
+<hibernate-mapping>
+	<class name="com.lut.vo.TeacherScore" table="teacherScore">
+		<id name="id">
+			<generator class="native"/>
+		</id>
+		<property name="score"/>
+		<many-to-one name="teacher" lazy="false" class="com.lut.vo.Teacher" column="t_id"></many-to-one>
+		<many-to-one name="student" lazy="false" class="com.lut.vo.Student" column="stu_id"></many-to-one>
+	</class>
+</hibernate-mapping>

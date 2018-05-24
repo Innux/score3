@@ -53,6 +53,8 @@
 				<value>com/lut/vo/Notice.hbm.xml</value>
 				<value>com/lut/vo/liuyan/Liuyan.hbm.xml</value>
 				<value>com/lut/vo/liuyan/Reply.hbm.xml</value>
+				<value>com/lut/vo/Teacher.hbm.xml</value>
+				<value>com/lut/vo/TeacherScore.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -118,6 +120,9 @@
 	<bean id="replyAction" class="com.lut.action.ReplyAction" scope="prototype">
 		<property name="replyService" ref="replyService"></property>
 	</bean>
+	<bean id="teacherAction" class="com.lut.action.TeacherAction" scope="prototype">
+		<property name="teacherScoreService" ref="teacherScoreService"></property>
+	</bean>
 	
 
 
@@ -173,6 +178,10 @@
 	<bean id="replyService" class="com.lut.service.ReplyService">
 		<property name="replyDao" ref="replyDao" />
 	</bean>
+	<bean id="teacherScoreService" class="com.lut.service.TeacherScoreService">
+		<property name="teacherScoreDao" ref="teacherScoreDao" />
+		<property name="teacherDao" ref="teacherDao" />
+	</bean>
 	
 	
 
@@ -219,6 +228,12 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<bean id="replyDao" class="com.lut.dao.ReplyDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="teacherDao" class="com.lut.dao.TeacherDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="teacherScoreDao" class="com.lut.dao.TeacherScoreDao">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
